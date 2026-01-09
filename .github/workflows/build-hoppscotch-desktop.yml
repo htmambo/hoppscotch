@@ -62,7 +62,7 @@ jobs:
           ref: ${{ inputs.tag != '' && inputs.tag || inputs.branch }}
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 22
       - uses: pnpm/action-setup@v4
       - uses: actions-rs/toolchain@v1
         with:
@@ -164,8 +164,11 @@ jobs:
           echo "OPENSSL_SRC_PERL=$((where.exe perl)[0])" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 22
       - uses: pnpm/action-setup@v4
+      - name: Install workspace dependencies (allow lockfile update)
+        shell: pwsh
+        run: pnpm install --no-frozen-lockfile
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
@@ -263,7 +266,7 @@ jobs:
           ref: ${{ inputs.tag != '' && inputs.tag || inputs.branch }}
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 22
       - uses: pnpm/action-setup@v4
       - uses: actions-rs/toolchain@v1
         with:
@@ -358,7 +361,7 @@ jobs:
           ref: ${{ inputs.tag != '' && inputs.tag || inputs.branch }}
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 22
       - uses: pnpm/action-setup@v4
       - uses: actions-rs/toolchain@v1
         with:
