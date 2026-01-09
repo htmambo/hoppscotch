@@ -8,7 +8,7 @@ on:
       repository:
         description: Repository to checkout
         required: false
-        default: "hoppscotch/hoppscotch"
+        default: "htmambo/hoppscotch"
       branch:
         description: Branch to checkout
         required: true
@@ -61,7 +61,6 @@ jobs:
         with:
           repository: ${{ inputs.repository }}
           ref: ${{ inputs.tag != '' && inputs.tag || inputs.branch }}
-          token: ${{ secrets.HOPPSCOTCH_GITHUB_CHECKOUT_TOKEN }}
       - uses: actions/setup-node@v3
         with:
           node-version: 20
