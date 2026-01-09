@@ -47,7 +47,7 @@
       "vue": "3.5.26",
       "form-data": "4.0.4",
       "ws": "8.17.1",
-      "isolated-vm": "6.0.3"
+      "isolated-vm": "5.0.4"
     },
     "onlyBuiltDependencies": [
       "@apollo/protobufjs",
