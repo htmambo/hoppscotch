@@ -19,7 +19,7 @@ use crate::{
 fn sanitize_window_label(input: &str) -> String {
     input
         .chars()
-        .map(|c| if c.is_alphanumeric() { c } else { '_' })
+        .map(|c| if c.is_ascii_alphanumeric() { c } else { '_' })
         .collect()
 }
 
@@ -33,7 +33,7 @@ pub async fn download<R: Runtime>(
     tracing::debug!("Retrieved BundleLoader state");
 
     tracing::info!(url = %options.server_url, "Attempting to load bundle");
-    bundle_loader
+    let metadata = bundle_loader
         .load_bundle(options.server_url.as_str())
         .await
         .map_err(|e| {
@@ -62,6 +62,7 @@ pub async fn download<R: Runtime>(
         bundle_name: entry.bundle_name,
         server_url: options.server_url,
         version: entry.version,
+        properties: metadata.properties,
     };
 
     tracing::info!(?response, "Download completed successfully");
@@ -87,7 +88,7 @@ pub async fn load<R: Runtime>(app: AppHandle<R>, options: LoadOptions) -> Result
 
     let window = WebviewWindowBuilder::new(&app, &label, WebviewUrl::App(url.parse().unwrap()))
         .initialization_script(crate::KERNEL_JS)
-        .title(sanitize_window_label(&options.window.title))
+        .title(&options.window.title)
         .inner_size(options.window.width, options.window.height)
         .resizable(options.window.resizable)
         .disable_drag_drop_handler()

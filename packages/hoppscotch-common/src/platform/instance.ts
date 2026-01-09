@@ -12,6 +12,7 @@ export type Instance = {
   version: string
   lastUsed: string
   bundleName?: string
+  properties?: Record<string, string>
 }
 
 export const VENDORED_INSTANCE_CONFIG: Instance = {

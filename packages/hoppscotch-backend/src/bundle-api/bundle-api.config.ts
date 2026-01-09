@@ -40,6 +40,19 @@ export class BundleApiEnv {
   @IsString()
   @IsOptional()
   BUNDLE_SIGNING_KEY_FILE?: string; // path to key file
+
+  // Bundle display information
+  @IsString()
+  @IsOptional()
+  BUNDLE_DISPLAY_NAME?: string; // Display name for the bundle
+
+  @IsString()
+  @IsOptional()
+  BUNDLE_TITLE?: string; // Window title when loaded in desktop app
+
+  @IsString()
+  @IsOptional()
+  BUNDLE_DESCRIPTION?: string; // Description of the bundle
 }
 
 /**
@@ -62,6 +75,9 @@ export function loadBundleApiConfig(): BundleApiConfig {
       secret: env.BUNDLE_SIGNING_SECRET,
       keyFile: env.BUNDLE_SIGNING_KEY_FILE,
     },
+    displayName: env.BUNDLE_DISPLAY_NAME,
+    title: env.BUNDLE_TITLE,
+    description: env.BUNDLE_DESCRIPTION,
   };
 
   return config;

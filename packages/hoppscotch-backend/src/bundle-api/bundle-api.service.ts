@@ -90,6 +90,21 @@ export class BundleApiService implements OnModuleInit {
     this.logger.debug("Generating signature for bundle");
     const signature = signData(zipBytes, keyPair.secretKey);
 
+    // Build properties with display information
+    const properties: Record<string, string> = {};
+
+    if (this.config.displayName) {
+      properties.name = this.config.displayName;
+    }
+
+    if (this.config.title) {
+      properties.title = this.config.title;
+    }
+
+    if (this.config.description) {
+      properties.description = this.config.description;
+    }
+
     // Build metadata
     const metadata: BundleMetadata = {
       version: version || buildManifest.version,
@@ -99,7 +114,7 @@ export class BundleApiService implements OnModuleInit {
         files: buildManifest.files,
         version: buildManifest.version,
       },
-      properties: {},
+      properties,
     };
 
     // Cache bundle data

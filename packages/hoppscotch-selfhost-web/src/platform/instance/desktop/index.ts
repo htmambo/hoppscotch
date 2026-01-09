@@ -867,8 +867,11 @@ export class DesktopInstanceService
     instanceKind: InstanceKind,
     displayName?: string
   ): Instance {
+    const nameFromProperties = response.properties?.name
+
     const finalDisplayName = pipe(
       O.fromNullable(displayName),
+      O.alt(() => O.fromNullable(nameFromProperties)),
       O.getOrElse(() => response.serverUrl),
       (rawName) =>
         pipe(
@@ -898,6 +901,7 @@ export class DesktopInstanceService
       version: response.version,
       lastUsed: new Date().toISOString(),
       bundleName: response.bundleName,
+      properties: response.properties,
     }
   }
 
@@ -942,10 +946,22 @@ export class DesktopInstanceService
       resizable: true,
     }
 
+    const instanceTitle =
+      instance.properties?.title ||
+      instance.properties?.name ||
+      instance.displayName ||
+      defaultWindowOptions.title
+
+    const finalTitle = options?.window?.title ?? instanceTitle
+
     return {
       bundleName: instance.bundleName!,
       inline: options?.inline ?? true,
-      window: options?.window ?? defaultWindowOptions,
+      window: {
+        ...defaultWindowOptions,
+        ...options?.window,
+        title: finalTitle,
+      },
     }
   }
 

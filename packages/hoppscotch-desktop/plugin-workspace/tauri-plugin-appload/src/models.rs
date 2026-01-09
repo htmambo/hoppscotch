@@ -141,6 +141,8 @@ pub struct DownloadResponse {
     pub bundle_name: String,
     pub server_url: Url,
     pub version: String,
+    #[serde(default)]
+    pub properties: HashMap<String, String>,
 }
 
 #[derive(Debug, Clone, Deserialize)]

@@ -81,6 +81,11 @@ export type BundleApiConfig = {
     secret?: string; // arbitrary string (will be hashed to seed)
     keyFile?: string; // path to file containing key
   };
+
+  // Display information (optional)
+  displayName?: string; // Display name for the bundle
+  title?: string; // Window title when loaded in desktop app
+  description?: string; // Description of the bundle
 };
 
 /**

@@ -64,7 +64,19 @@ BUNDLE_SIGNING_SECRET=your-long-random-secret-string-here
 
 # Bundle 最大大小（默认 50MB）
 BUNDLE_MAX_SIZE_BYTES=52428800
+
+# 自定义显示信息（可选）
+BUNDLE_DISPLAY_NAME=My Company Hoppscotch
+BUNDLE_TITLE=My API Tools
+BUNDLE_DESCRIPTION=Internal API development platform
 ```
+
+**显示信息说明**：
+- `BUNDLE_DISPLAY_NAME`: Bundle 的显示名称（会显示在桌面应用的实例列表中）
+- `BUNDLE_TITLE`: 窗口标题（当桌面应用加载此 bundle 时使用）
+- `BUNDLE_DESCRIPTION`: Bundle 描述信息（提供额外的上下文信息）
+
+这些信息会包含在 `/api/v1/manifest` 响应的 `properties` 字段中，桌面应用可以根据需要使用这些信息。
 
 ---
 
@@ -103,6 +115,9 @@ services:
       - BUNDLE_MANIFEST_PATH=/dist/backend/bundle/manifest.json
       - BUNDLE_VERSION=2025.12.1
       - BUNDLE_SIGNING_SECRET=your-secret-here
+      - BUNDLE_DISPLAY_NAME=My Company Hoppscotch
+      - BUNDLE_TITLE=My API Tools
+      - BUNDLE_DESCRIPTION=Internal API development platform
       - DATABASE_URL=postgresql://user:pass@db:5432/hoppscotch
     ports:
       - "3170:3170"
@@ -211,10 +226,22 @@ curl http://localhost:3170/api/v1/key
       ],
       "version": "2025.12.1"
     },
-    "properties": {}
+    "properties": {
+      "name": "My Company Hoppscotch",
+      "title": "My API Tools",
+      "description": "Internal API development platform"
+    }
   }
 }
 ```
+
+**properties 字段说明**：
+- 如果配置了 `BUNDLE_DISPLAY_NAME`、`BUNDLE_TITLE` 或 `BUNDLE_DESCRIPTION`，这些信息会包含在 `properties` 字段中
+- 桌面应用可以使用这些信息来：
+  - 在实例列表中显示自定义名称（`properties.name`）
+  - 设置窗口标题（`properties.title`）
+  - 显示描述信息（`properties.description`）
+- 如果未配置，`properties` 将为空对象 `{}`
 
 **示例**：
 ```bash
@@ -446,6 +473,23 @@ curl -O http://localhost:3170/api/v1/manifest
 **A**: 不建议同时启用，会导致路径冲突。建议选择其中一种：
 - **Go webapp-server**：已验证，稳定，但需要额外的服务
 - **NestJS Bundle API**：集成在 backend 中，更简单
+
+### Q6: 如何自定义 bundle 的显示名称和窗口标题？
+
+**A**: 通过配置以下环境变量来自定义显示信息：
+
+```env
+BUNDLE_DISPLAY_NAME=My Company Hoppscotch
+BUNDLE_TITLE=My API Tools
+BUNDLE_DESCRIPTION=Internal API development platform
+```
+
+这些信息会：
+- 显示在桌面应用的实例列表中（使用 `properties.name`）
+- 作为窗口标题（使用 `properties.title`）
+- 提供额外的描述信息（`properties.description`）
+
+桌面应用会在 `/api/v1/manifest` 响应的 `properties` 字段中获取这些信息。
 
 ---
 

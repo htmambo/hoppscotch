@@ -24,7 +24,7 @@ impl BundleLoader {
         Self { cache, storage }
     }
 
-    pub async fn load_bundle(&self, server_url: &str) -> Result<()> {
+    pub async fn load_bundle(&self, server_url: &str) -> Result<crate::BundleMetadata> {
         tracing::info!(%server_url, "Starting bundle loading process");
 
         let api_client = self.create_api_client(server_url)?;
@@ -43,7 +43,7 @@ impl BundleLoader {
             .await?;
 
         tracing::info!(%server_url, "Bundle loading completed successfully");
-        Ok(())
+        Ok(metadata)
     }
 
     async fn get_bundle_info(

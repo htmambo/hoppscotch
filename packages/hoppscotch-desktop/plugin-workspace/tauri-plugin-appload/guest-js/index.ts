@@ -9,6 +9,7 @@ export interface DownloadResponse {
   bundleName: string
   serverUrl: string
   version: string
+  properties?: Record<string, string>
 }
 
 export interface WindowOptions {
