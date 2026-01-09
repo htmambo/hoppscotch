@@ -18,7 +18,13 @@
     "lintfix": "pnpm -r do-lintfix",
     "pre-commit": "pnpm -r do-lint && pnpm -r do-typecheck",
     "test": "pnpm -r do-test",
-    "generate-ui": "pnpm -r do-build-ui"
+    "generate-ui": "pnpm -r do-build-ui",
+    "bundle:web:build": "pnpm --dir packages/hoppscotch-selfhost-web run generate",
+    "bundle:bundle:make": "node -e \"require('fs').mkdirSync('dist/backend/bundle',{recursive:true})\" && cargo run --manifest-path packages/hoppscotch-desktop/crates/webapp-bundler/Cargo.toml --release --locked -- --input packages/hoppscotch-selfhost-web/dist --output dist/backend/bundle/bundle.zip --manifest dist/backend/bundle/manifest.json",
+    "bundle:make": "pnpm run bundle:web:build && pnpm run bundle:bundle:make",
+    "bundle:make:dev": "cross-env WEBAPP_BUNDLE_VERSION=dev pnpm run bundle:make",
+    "bundle:inspect": "node -e \"console.log(JSON.parse(require('fs').readFileSync('dist/backend/bundle/manifest.json','utf8')).version)\"",
+    "bundle:clean": "node -e \"require('fs').rmSync('dist/backend/bundle',{recursive:true,force:true})\""
   },
   "workspaces": [
     "./packages/*"

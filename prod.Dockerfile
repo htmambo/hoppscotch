@@ -114,11 +114,51 @@ RUN pnpm --filter=hoppscotch-backend deploy /dist/backend --prod --legacy
 WORKDIR /dist/backend
 RUN pnpm exec prisma generate
 
+# Bundle builder stage
+# Generates bundle.zip and manifest.json for desktop app to download
+FROM base_builder AS bundle_builder
+
+# Bundle version (build-time), will be embedded into manifest.json
+ARG WEBAPP_BUNDLE_VERSION=dev
+ENV WEBAPP_BUNDLE_VERSION=${WEBAPP_BUNDLE_VERSION}
+
+# Install Rust toolchain (required for webapp-bundler)
+RUN apk add --no-cache \
+    build-base \
+    musl-dev \
+    pkgconf \
+    zstd-dev \
+    openssl-dev \
+    ca-certificates \
+    curl
+
+# Install Rust via rustup
+RUN curl -fsSL https://sh.rustup.rs | sh -s -- -y --profile minimal --default-toolchain 1.85.0
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+# Bring in the already-built backend deploy output
+COPY --from=backend_builder /dist/backend /dist/backend
+
+# Build the selfhost web dist (this is the bundler input directory)
+WORKDIR /usr/src/app/packages/hoppscotch-selfhost-web
+RUN pnpm run generate
+
+# Build the webapp-bundler binary
+WORKDIR /usr/src/app/packages/hoppscotch-desktop/crates/webapp-bundler
+RUN cargo build --release --locked
+
+# Run bundler to generate bundle.zip + manifest.json into /dist/backend/bundle/
+RUN mkdir -p /dist/backend/bundle && \
+    ./target/release/webapp-bundler \
+      --input /usr/src/app/packages/hoppscotch-selfhost-web/dist \
+      --output /dist/backend/bundle/bundle.zip \
+      --manifest /dist/backend/bundle/manifest.json
+
 FROM node_base AS backend
 # Install caddy
 COPY --from=caddy_builder /tmp/caddy-build/cmd/caddy/caddy /usr/bin/caddy
 COPY --from=base_builder  /usr/src/app/packages/hoppscotch-backend/backend.Caddyfile /etc/caddy/backend.Caddyfile
-COPY --from=backend_builder /dist/backend /dist/backend
+COPY --from=bundle_builder /dist/backend /dist/backend
 COPY --from=base_builder /usr/src/app/packages/hoppscotch-backend/prod_run.mjs /dist/backend
 
 # Remove the env file to avoid backend copying it in and using it
@@ -201,7 +241,7 @@ LABEL org.opencontainers.image.source="https://github.com/hoppscotch/hoppscotch"
 # Copy necessary files
 # Backend files
 COPY --from=base_builder /usr/src/app/packages/hoppscotch-backend/backend.Caddyfile /etc/caddy/backend.Caddyfile
-COPY --from=backend_builder /dist/backend /dist/backend
+COPY --from=bundle_builder /dist/backend /dist/backend
 COPY --from=base_builder /usr/src/app/packages/hoppscotch-backend/prod_run.mjs /dist/backend
 
 # Static Server
