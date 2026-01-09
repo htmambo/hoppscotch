@@ -2,38 +2,16 @@ import * as E from "fp-ts/Either"
 import { z } from "zod"
 import { StoreError } from "@hoppscotch/kernel"
 import { Store } from "~/kernel/store"
-import { UpdateState, PortableSettings } from "~/types"
+import { PortableSettings } from "~/types"
 
 export const STORE_NAMESPACE = "hoppscotch-desktop.v1"
 
 export const STORE_KEYS = {
-  UPDATE_STATE: "updateState",
   CONNECTION_STATE: "connectionState",
   RECENT_INSTANCES: "recentInstances",
   SCHEMA_VERSION: "schema_version",
   PORTABLE_SETTINGS: "portableSettings",
 } as const
-
-export const UPDATE_STATE_SCHEMA = z.object({
-  status: z.enum([
-    "idle",
-    "checking",
-    "available",
-    "not_available",
-    "downloading",
-    "installing",
-    "ready_to_restart",
-    "error",
-  ]),
-  version: z.string().optional(),
-  message: z.string().optional(),
-  progress: z
-    .object({
-      downloaded: z.number(),
-      total: z.number().optional(),
-    })
-    .optional(),
-})
 
 export const INSTANCE_SCHEMA = z.object({
   kind: z.enum(["on-prem", "cloud", "cloud-org", "vendored"]),
@@ -52,7 +30,6 @@ export const CONNECTION_STATE_SCHEMA = z.object({
 })
 
 export const PORTABLE_SETTINGS_SCHEMA = z.object({
-  disableUpdateNotifications: z.boolean(),
   autoSkipWelcome: z.boolean(),
 })
 
@@ -115,39 +92,6 @@ export class DesktopPersistenceService {
 
       await Store.set(STORE_NAMESPACE, STORE_KEYS.SCHEMA_VERSION, targetVersion)
     }
-  }
-
-  async setUpdateState(state: UpdateState): Promise<void> {
-    const result = await Store.set(
-      STORE_NAMESPACE,
-      STORE_KEYS.UPDATE_STATE,
-      state
-    )
-    if (E.isLeft(result)) {
-      console.error("Failed to save update state:", result.left)
-    }
-  }
-
-  async getUpdateState(): Promise<UpdateState | null> {
-    const result = await Store.get<UpdateState>(
-      STORE_NAMESPACE,
-      STORE_KEYS.UPDATE_STATE
-    )
-    if (E.isRight(result) && result.right) {
-      return result.right
-    }
-    return null
-  }
-
-  async watchUpdateState(
-    handler: (state: UpdateState) => void
-  ): Promise<() => void> {
-    const watcher = await Store.watch(STORE_NAMESPACE, STORE_KEYS.UPDATE_STATE)
-    return watcher.on("change", ({ value }: { value?: unknown }) => {
-      if (value) {
-        handler(value as UpdateState)
-      }
-    })
   }
 
   async setConnectionState(state: ConnectionState): Promise<void> {
@@ -246,14 +190,16 @@ export class DesktopPersistenceService {
       STORE_KEYS.PORTABLE_SETTINGS
     )
 
-    const defaultSettings = {
-      disableUpdateNotifications: false,
+    const defaultSettings: PortableSettings = {
       autoSkipWelcome: false,
     }
 
     if (E.isRight(result) && result.right) {
       console.log("Loaded portable settings from store:", result.right)
-      return result.right
+      // Backward compatibility: only use autoSkipWelcome field
+      return {
+        autoSkipWelcome: result.right.autoSkipWelcome ?? false,
+      }
     }
 
     console.log("No portable settings found, using defaults:", defaultSettings)

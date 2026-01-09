@@ -32,7 +32,7 @@ export const REST_COLLECTIONS_MOCK: HoppCollection[] = [
         v: RESTReqSchemaVersion,
         name: "Echo test",
         method: "GET",
-        endpoint: "https://echo.hoppscotch.io",
+        endpoint: "https://www.hongshu.com",
         params: [],
         headers: [],
         preRequestScript: "",
@@ -66,7 +66,7 @@ export const GQL_COLLECTIONS_MOCK: HoppCollection[] = [
       {
         v: 9,
         name: "Echo test",
-        url: "https://echo.hoppscotch.io/graphql",
+        url: "https://www.hongshu.com/graphql",
         headers: [],
         query: "query Request { url }",
         variables: '{\n  "id": "1"\n}',
@@ -166,7 +166,7 @@ export const REST_HISTORY_MOCK: RESTHistoryEntry[] = [
     request: {
       auth: { authType: "none", authActive: true },
       body: { contentType: null, body: null },
-      endpoint: "https://echo.hoppscotch.io",
+      endpoint: "https://www.hongshu.com",
       headers: [],
       method: "GET",
       name: "Untitled",
@@ -190,7 +190,7 @@ export const GQL_HISTORY_MOCK: GQLHistoryEntry[] = [
     request: {
       v: 9,
       name: "Untitled",
-      url: "https://echo.hoppscotch.io/graphql",
+      url: "https://www.hongshu.com/graphql",
       query: "query Request { url }",
       headers: [],
       variables: "",
@@ -211,7 +211,7 @@ export const GQL_TAB_STATE_MOCK: PersistableTabState<HoppGQLDocument> = {
         request: {
           v: 9,
           name: "Untitled",
-          url: "https://echo.hoppscotch.io/graphql",
+          url: "https://www.hongshu.com/graphql",
           headers: [],
           variables: '{\n  "id": "1"\n}',
           query: "query Request { url }",
@@ -233,7 +233,7 @@ export const REST_TAB_STATE_MOCK: PersistableTabState<HoppRequestDocument> = {
       doc: {
         request: {
           v: RESTReqSchemaVersion,
-          endpoint: "https://echo.hoppscotch.io",
+          endpoint: "https://www.hongshu.com",
           name: "Echo test",
           params: [],
           headers: [],

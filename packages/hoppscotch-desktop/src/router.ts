@@ -9,10 +9,7 @@ const router = createRouter({
       name: "home",
       component: async () => {
         try {
-          const isPortable = await invoke<boolean>("is_portable_mode")
-          // Dynamic import because otherwise `updater`
-          // tends to experience weird race conditions,
-          // not sure how or why
+          const isPortable = await invoke<boolean>("is_portable")
           return isPortable
             ? import("./views/PortableHome.vue")
             : import("./views/StandardHome.vue")

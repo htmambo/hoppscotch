@@ -20,7 +20,7 @@ interface StoredData {
 
 const DEFAULT_SETTINGS: ProxySettings = {
   version: "v1",
-  proxyUrl: settingsStore.value.PROXY_URL ?? "https://proxy.hoppscotch.io",
+  proxyUrl: settingsStore.value.PROXY_URL ?? "http://127.0.0.1:7890",
   accessToken: import.meta.env.VITE_PROXYSCOTCH_ACCESS_TOKEN ?? "",
 }
 

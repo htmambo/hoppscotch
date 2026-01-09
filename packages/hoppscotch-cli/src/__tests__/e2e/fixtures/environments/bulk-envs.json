@@ -20,7 +20,7 @@
     "variables": [
       {
         "key": "baseUrl",
-        "value": "https://echo.hoppscotch.io",
+        "value": "https://www.hongshu.com",
         "secret": false
       },
       {

@@ -15,7 +15,6 @@
     "store:default",
     "dialog:default",
     "process:default",
-    "updater:default",
     "fs:allow-copy-file",
     "fs:allow-remove",
     "fs:allow-exists",

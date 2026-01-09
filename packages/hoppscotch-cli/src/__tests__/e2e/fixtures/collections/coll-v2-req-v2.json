@@ -9,7 +9,7 @@
             "requests": [
                 {
                     "v": "2",
-                    "endpoint": "https://echo.hoppscotch.io",
+                    "endpoint": "https://www.hongshu.com",
                     "headers": [
                         {
                             "key": "Inactive-Header",
@@ -60,7 +60,7 @@
     "requests": [
         {
             "v": "2",
-            "endpoint": "https://echo.hoppscotch.io",
+            "endpoint": "https://www.hongshu.com",
             "headers": [
                 {
                     "key": "Inactive-Header",

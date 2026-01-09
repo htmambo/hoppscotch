@@ -16,7 +16,7 @@
           "id": "cmeicyhnn00y1lb1j8d80g7ys",
           "name": "request-1",
           "method": "GET",
-          "endpoint": "https://echo.hoppscotch.io",
+          "endpoint": "https://www.hongshu.com",
           "params": [
             {
               "key": "collection-var-1",

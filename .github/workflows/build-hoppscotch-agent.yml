@@ -58,17 +58,14 @@ jobs:
       - name: Checkout hoppscotch/hoppscotch
         uses: actions/checkout@v3
         with:
-          repository: hoppscotch/hoppscotch
+          repository: htmambo/hoppscotch
           ref: ${{ inputs.branch }}
-          token: ${{ secrets.HOPPSCOTCH_GITHUB_CHECKOUT_TOKEN }}
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10.15.0
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
@@ -86,12 +83,6 @@ jobs:
           unzip cargo-tauri-x86_64-apple-darwin.zip
           chmod +x cargo-tauri
           sudo mv cargo-tauri /usr/local/bin/tauri
-      - name: Import Code-Signing Certificates
-        uses: apple-actions/import-codesign-certs@v3
-        with:
-          p12-file-base64: ${{ secrets.HOPPSCOTCH_APPLE_CERTIFICATE }}
-          p12-password: ${{ secrets.HOPPSCOTCH_APPLE_CERTIFICATE_PASSWORD }}
-          keychain-password: ${{ secrets.KEYCHAIN_PASSWORD }}
       - name: Cache Rust dependencies
         uses: actions/cache@v4
         with:
@@ -108,17 +99,15 @@ jobs:
       - name: Build Tauri app
         timeout-minutes: 30
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.AGENT_TAURI_SIGNING_PRIVATE_KEY }}
-          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.AGENT_TAURI_SIGNING_PASSWORD }}
+          AGENT_TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.AGENT_TAURI_SIGNING_PRIVATE_KEY }}
+          AGENT_TAURI_SIGNING_PASSWORD: ${{ secrets.AGENT_TAURI_SIGNING_PASSWORD }}
           APPLE_ID: ${{ secrets.HOPPSCOTCH_APPLE_ID }}
           APPLE_PASSWORD: ${{ secrets.HOPPSCOTCH_APPLE_PASSWORD }}
           APPLE_TEAM_ID: ${{ secrets.HOPPSCOTCH_APPLE_TEAM_ID }}
           APPLE_SIGNING_IDENTITY: ${{ secrets.HOPPSCOTCH_APPLE_SIGNING_IDENTITY }}
         run: |
-          cd packages/hoppscotch-agent
           echo "Starting x86_64 build..."
-          pnpm tauri build --verbose --target x86_64-apple-darwin
+          bash scripts/ci/tauri-build.sh packages/hoppscotch-agent x86_64-apple-darwin AGENT_TAURI_SIGNING_PRIVATE_KEY
           echo "Build completed"
       - name: Prepare artifacts
         run: |
@@ -167,8 +156,6 @@ jobs:
           node-version: 20
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10.15.0
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
@@ -209,16 +196,15 @@ jobs:
         timeout-minutes: 30
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.AGENT_TAURI_SIGNING_PRIVATE_KEY }}
-          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.AGENT_TAURI_SIGNING_PASSWORD }}
+          AGENT_TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.AGENT_TAURI_SIGNING_PRIVATE_KEY }}
+          AGENT_TAURI_SIGNING_PASSWORD: ${{ secrets.AGENT_TAURI_SIGNING_PASSWORD }}
           APPLE_ID: ${{ secrets.HOPPSCOTCH_APPLE_ID }}
           APPLE_PASSWORD: ${{ secrets.HOPPSCOTCH_APPLE_PASSWORD }}
           APPLE_TEAM_ID: ${{ secrets.HOPPSCOTCH_APPLE_TEAM_ID }}
           APPLE_SIGNING_IDENTITY: ${{ secrets.HOPPSCOTCH_APPLE_SIGNING_IDENTITY }}
         run: |
-          cd packages/hoppscotch-agent
           echo "Starting ARM64 build..."
-          pnpm tauri build --verbose --target aarch64-apple-darwin
+          bash scripts/ci/tauri-build.sh packages/hoppscotch-agent aarch64-apple-darwin AGENT_TAURI_SIGNING_PRIVATE_KEY
           echo "Build completed"
       - name: Prepare artifacts
         run: |
@@ -267,8 +253,6 @@ jobs:
           node-version: 20
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10.15.0
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
@@ -359,8 +343,6 @@ jobs:
           node-version: 20
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10.15.0
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:

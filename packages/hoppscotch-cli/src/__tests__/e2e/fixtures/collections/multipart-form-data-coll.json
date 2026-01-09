@@ -5,7 +5,7 @@
   "requests": [
     {
       "v": "7",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "name": "multipart-form-data-sample-req",
       "params": [],
       "headers": [],

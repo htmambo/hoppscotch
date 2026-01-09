@@ -9,7 +9,7 @@ const samples = [
   {
     command: `
       curl --request GET \
-      --url https://echo.hoppscotch.io/ \
+      --url https://www.hongshu.com/ \
       --header 'content-type: application/x-www-form-urlencoded' \
       --data a=b \
       --data c=d
@@ -17,7 +17,7 @@ const samples = [
     response: makeRESTRequest({
       method: "GET",
       name: "Untitled",
-      endpoint: "https://echo.hoppscotch.io/",
+      endpoint: "https://www.hongshu.com/",
       auth: { authType: "inherit", authActive: true },
       body: {
         contentType: "application/x-www-form-urlencoded",
@@ -592,7 +592,7 @@ const samples = [
   },
   {
     command: `curl --request GET \
-    --url 'https://echo.hoppscotch.io/?hello=there' \
+    --url 'https://www.hongshu.com/?hello=there' \
     --header 'content-type: application/x-www-form-urlencoded' \
     --header 'something: other-thing' \
     --data a=b \
@@ -600,7 +600,7 @@ const samples = [
     response: makeRESTRequest({
       method: "GET",
       name: "Untitled",
-      endpoint: "https://echo.hoppscotch.io/",
+      endpoint: "https://www.hongshu.com/",
       auth: { authType: "inherit", authActive: true },
       body: {
         contentType: "application/x-www-form-urlencoded",
@@ -641,14 +641,14 @@ const samples = [
   },
   {
     command: `curl --request POST \
-    --url 'https://echo.hoppscotch.io/?hello=there' \
+    --url 'https://www.hongshu.com/?hello=there' \
     --header 'content-type: multipart/form-data' \
     --header 'something: other-thing' \
     --form a=b \
     --form c=d`,
     response: makeRESTRequest({
       name: "Untitled",
-      endpoint: "https://echo.hoppscotch.io/",
+      endpoint: "https://www.hongshu.com/",
       method: "POST",
       auth: { authType: "inherit", authActive: true },
       headers: [
@@ -710,7 +710,7 @@ const samples = [
     command: "curl -F abcd=efghi",
     response: makeRESTRequest({
       name: "Untitled",
-      endpoint: "https://echo.hoppscotch.io/",
+      endpoint: "https://www.hongshu.com/",
       method: "POST",
       auth: { authType: "inherit", authActive: true },
       headers: [],
@@ -755,7 +755,7 @@ const samples = [
     command: "curl echo.hoppscotch.io -A pinephone",
     response: makeRESTRequest({
       name: "Untitled",
-      endpoint: "https://echo.hoppscotch.io/",
+      endpoint: "https://www.hongshu.com/",
       method: "GET",
       auth: { authType: "inherit", authActive: true },
       headers: [
@@ -781,7 +781,7 @@ const samples = [
     command: "curl echo.hoppscotch.io -G",
     response: makeRESTRequest({
       name: "Untitled",
-      endpoint: "https://echo.hoppscotch.io/",
+      endpoint: "https://www.hongshu.com/",
       method: "GET",
       auth: { authType: "inherit", authActive: true },
       headers: [],
@@ -982,14 +982,14 @@ data2: {"type":"test2","typeId":"123"}`,
   },
   {
     command: `curl --request GET \
-    --url https://echo.hoppscotch.io/ \
+    --url https://www.hongshu.com/ \
     --header 'Authorization:Basic YXNkZmdoOjEyMzQ=' \
     --header 'User-Agent:Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0'
     --header 'foo:bar'`,
     response: makeRESTRequest({
       method: "GET",
       name: "Untitled",
-      endpoint: "https://echo.hoppscotch.io/",
+      endpoint: "https://www.hongshu.com/",
       auth: {
         authType: "basic",
         authActive: true,

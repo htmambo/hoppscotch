@@ -45,7 +45,7 @@
       "requestVariables": [
         {
           "key": "url",
-          "value": "https://echo.hoppscotch.io",
+          "value": "https://www.hongshu.com",
           "active": true
         },
         {
@@ -129,7 +129,7 @@
       "requestVariables": [
         {
           "key": "url",
-          "value": "https://echo.hoppscotch.io",
+          "value": "https://www.hongshu.com",
           "active": true
         },
         {

@@ -724,7 +724,7 @@ describe("hopp test [options] <file_path_or_id>", { timeout: 100000 }, () => {
         const result = await runCLIWithNetworkRetry(args, { env });
         if (result === null) return;
         expect(result.stdout).toContain(
-          "https://echo.hoppscotch.io/********/********"
+          "https://www.hongshu.com/********/********"
         );
         expect(result.error).toBeNull();
       });

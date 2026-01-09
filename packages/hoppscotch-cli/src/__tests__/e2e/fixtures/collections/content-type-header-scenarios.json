@@ -17,7 +17,7 @@
             "method": "POST",
             "params": [],
             "headers": [],
-            "endpoint": "https://echo.hoppscotch.io",
+            "endpoint": "https://www.hongshu.com",
             "testScript": "pw.test(\"The `Content-Type` header is assigned the content type value set at the request body level\", ()=> {\n    pw.expect(pw.response.body.headers[\"content-type\"]).toBe(\"text/xml\");\n});",
             "preRequestScript": "",
             "requestVariables": []
@@ -42,7 +42,7 @@
                     "active": true
                 }
             ],
-            "endpoint": "https://echo.hoppscotch.io",
+            "endpoint": "https://www.hongshu.com",
             "testScript": "pw.test(\"The `Content-Type` header overrides the content type value set at the request body level\", ()=> {\n    pw.expect(pw.response.body.headers[\"content-type\"]).toBe(\"application/xml\");\n});",
             "preRequestScript": "",
             "requestVariables": []
@@ -77,7 +77,7 @@
                     "active": true
                 }
             ],
-            "endpoint": "https://echo.hoppscotch.io",
+            "endpoint": "https://www.hongshu.com",
             "testScript": "pw.test(\"The last occurrence will be considered among multiple `Content-Type` headers\", ()=> {\n    pw.expect(pw.response.body.headers[\"content-type\"]).toBe(\"application/xml\");\n});",
             "preRequestScript": "",
             "requestVariables": []
@@ -117,7 +117,7 @@
                     "active": true
                 }
             ],
-            "endpoint": "https://echo.hoppscotch.io",
+            "endpoint": "https://www.hongshu.com",
             "testScript": "pw.test(\"The last occurrence will be considered among multiple `Content-Type` headers following different casing\", ()=> {\n    pw.expect(pw.response.body.headers[\"content-type\"]).toBe(\"application/xml\");\n});",
             "preRequestScript": "",
             "requestVariables": []
@@ -157,7 +157,7 @@
                     "active": true
                 }
             ],
-            "endpoint": "https://echo.hoppscotch.io",
+            "endpoint": "https://www.hongshu.com",
             "testScript": "pw.test(\"The content type is inferred from the `Content-Type` header if not set at the request body\", ()=> {\n    pw.expect(pw.response.body.headers[\"content-type\"]).toBe(\"application/xml\");\n});",
             "preRequestScript": "",
             "requestVariables": []

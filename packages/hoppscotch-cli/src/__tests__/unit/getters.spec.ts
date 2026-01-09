@@ -346,7 +346,7 @@ describe("getters", () => {
                   teamID: "clwt6r6j10031kc6pu0b08y6e",
                   title: "req1",
                   request:
-                    '{"v":"4","auth":{"authType":"inherit","authActive":true},"body":{"body":null,"contentType":null},"name":"req1","method":"GET","params":[],"headers":[],"endpoint":"https://echo.hoppscotch.io","testScript":"","preRequestScript":"","requestVariables":[]}',
+                    '{"v":"4","auth":{"authType":"inherit","authActive":true},"body":{"body":null,"contentType":null},"name":"req1","method":"GET","params":[],"headers":[],"endpoint":"https://www.hongshu.com","testScript":"","preRequestScript":"","requestVariables":[]}',
                 },
               ],
             },

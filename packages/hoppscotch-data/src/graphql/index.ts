@@ -64,7 +64,7 @@ export function getDefaultGQLRequest(): HoppGQLRequest {
   return {
     v: GQL_REQ_SCHEMA_VERSION,
     name: "Untitled",
-    url: "https://echo.hoppscotch.io/graphql",
+    url: "https://www.hongshu.com/graphql",
     headers: [],
     variables: `
 {

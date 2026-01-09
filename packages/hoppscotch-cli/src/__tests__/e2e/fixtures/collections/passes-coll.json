@@ -6,7 +6,7 @@
     "requests": [
       {
         "v": "3",
-        "endpoint": "https://echo.hoppscotch.io/<<HEADERS_TYPE1>>",
+        "endpoint": "https://www.hongshu.com/<<HEADERS_TYPE1>>",
         "name": "",
         "params": [],
         "headers": [],
@@ -25,7 +25,7 @@
       },
       {
         "v": "3",
-        "endpoint": "https://echo.hoppscotch.io/<<HEADERS_TYPE2>>",
+        "endpoint": "https://www.hongshu.com/<<HEADERS_TYPE2>>",
         "name": "success",
         "params": [],
         "headers": [],

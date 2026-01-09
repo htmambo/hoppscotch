@@ -13,8 +13,8 @@ describe("pw.env.unset", () => {
           selected: [
             {
               key: "baseUrl",
-              currentValue: "https://echo.hoppscotch.io",
-              initialValue: "https://echo.hoppscotch.io",
+              currentValue: "https://www.hongshu.com",
+              initialValue: "https://www.hongshu.com",
               secret: false,
             },
           ],
@@ -37,8 +37,8 @@ describe("pw.env.unset", () => {
           global: [
             {
               key: "baseUrl",
-              currentValue: "https://echo.hoppscotch.io",
-              initialValue: "https://echo.hoppscotch.io",
+              currentValue: "https://www.hongshu.com",
+              initialValue: "https://www.hongshu.com",
               secret: false,
             },
           ],
@@ -70,8 +70,8 @@ describe("pw.env.unset", () => {
           selected: [
             {
               key: "baseUrl",
-              currentValue: "https://echo.hoppscotch.io",
-              initialValue: "https://echo.hoppscotch.io",
+              currentValue: "https://www.hongshu.com",
+              initialValue: "https://www.hongshu.com",
               secret: false,
             },
           ],
@@ -102,8 +102,8 @@ describe("pw.env.unset", () => {
           global: [
             {
               key: "baseUrl",
-              currentValue: "https://echo.hoppscotch.io",
-              initialValue: "https://echo.hoppscotch.io",
+              currentValue: "https://www.hongshu.com",
+              initialValue: "https://www.hongshu.com",
               secret: false,
             },
           ],
@@ -116,8 +116,8 @@ describe("pw.env.unset", () => {
             },
             {
               key: "baseUrl",
-              currentValue: "https://echo.hoppscotch.io",
-              initialValue: "https://echo.hoppscotch.io",
+              currentValue: "https://www.hongshu.com",
+              initialValue: "https://www.hongshu.com",
               secret: false,
             },
           ],
@@ -128,16 +128,16 @@ describe("pw.env.unset", () => {
         global: [
           {
             key: "baseUrl",
-            currentValue: "https://echo.hoppscotch.io",
-            initialValue: "https://echo.hoppscotch.io",
+            currentValue: "https://www.hongshu.com",
+            initialValue: "https://www.hongshu.com",
             secret: false,
           },
         ],
         selected: [
           {
             key: "baseUrl",
-            currentValue: "https://echo.hoppscotch.io",
-            initialValue: "https://echo.hoppscotch.io",
+            currentValue: "https://www.hongshu.com",
+            initialValue: "https://www.hongshu.com",
             secret: false,
           },
         ],
@@ -161,8 +161,8 @@ describe("pw.env.unset", () => {
             },
             {
               key: "baseUrl",
-              currentValue: "https://echo.hoppscotch.io",
-              initialValue: "https://echo.hoppscotch.io",
+              currentValue: "https://www.hongshu.com",
+              initialValue: "https://www.hongshu.com",
               secret: false,
             },
           ],
@@ -174,8 +174,8 @@ describe("pw.env.unset", () => {
         global: [
           {
             key: "baseUrl",
-            currentValue: "https://echo.hoppscotch.io",
-            initialValue: "https://echo.hoppscotch.io",
+            currentValue: "https://www.hongshu.com",
+            initialValue: "https://www.hongshu.com",
             secret: false,
           },
         ],
@@ -229,8 +229,8 @@ describe("pw.env.unset", () => {
           selected: [
             {
               key: "baseUrl",
-              currentValue: "https://echo.hoppscotch.io",
-              initialValue: "https://echo.hoppscotch.io",
+              currentValue: "https://www.hongshu.com",
+              initialValue: "https://www.hongshu.com",
               secret: false,
             },
           ],

@@ -5,8 +5,8 @@
   "variables": [
     {
       "key": "baseURL",
-      "initialValue": "https://echo.hoppscotch.io",
-      "currentValue": "https://echo.hoppscotch.io",
+      "initialValue": "https://www.hongshu.com",
+      "currentValue": "https://www.hongshu.com",
       "secret": false
     }
   ]

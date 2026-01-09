@@ -59,14 +59,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: ${{ inputs.repository }}
           ref: ${{ inputs.tag != '' && inputs.tag || inputs.branch }}
       - uses: actions/setup-node@v3
         with:
           node-version: 20
       - uses: pnpm/action-setup@v4
-        with:
-          version: 10.18.3
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
@@ -159,9 +156,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: ${{ inputs.repository }}
           ref: ${{ inputs.tag != '' && inputs.tag || inputs.branch }}
-          token: ${{ secrets.HOPPSCOTCH_GITHUB_CHECKOUT_TOKEN }}
       - name: Set Perl environment variables
         shell: pwsh
         run: |
@@ -171,8 +166,6 @@ jobs:
         with:
           node-version: 20
       - uses: pnpm/action-setup@v4
-        with:
-          version: 10.18.3
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
@@ -267,15 +260,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: ${{ inputs.repository }}
           ref: ${{ inputs.tag != '' && inputs.tag || inputs.branch }}
-          token: ${{ secrets.HOPPSCOTCH_GITHUB_CHECKOUT_TOKEN }}
       - uses: actions/setup-node@v3
         with:
           node-version: 20
       - uses: pnpm/action-setup@v4
-        with:
-          version: 10.18.3
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
@@ -337,7 +326,9 @@ jobs:
           APPLE_TEAM_ID: ${{ secrets.HOPPSCOTCH_APPLE_TEAM_ID }}
           APPLE_SIGNING_IDENTITY: ${{ secrets.HOPPSCOTCH_APPLE_SIGNING_IDENTITY }}
           RUST_LOG: debug
-        run: pnpm --dir ${{ env.DESKTOP_PATH }} tauri build --verbose --target x86_64-apple-darwin
+        run: |
+          echo "Using shared tauri build helper"
+          bash scripts/ci/tauri-build.sh "${{ env.DESKTOP_PATH }}" x86_64-apple-darwin TAURI_SIGNING_PRIVATE_KEY
       - name: Build Tauri app without Apple signing
         if: ${{ inputs.disable_signing == true }}
         env:
@@ -364,15 +355,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: ${{ inputs.repository }}
           ref: ${{ inputs.tag != '' && inputs.tag || inputs.branch }}
-          token: ${{ secrets.HOPPSCOTCH_GITHUB_CHECKOUT_TOKEN }}
       - uses: actions/setup-node@v3
         with:
           node-version: 20
       - uses: pnpm/action-setup@v4
-        with:
-          version: 10.18.3
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
@@ -434,7 +421,9 @@ jobs:
           APPLE_TEAM_ID: ${{ secrets.HOPPSCOTCH_APPLE_TEAM_ID }}
           APPLE_SIGNING_IDENTITY: ${{ secrets.HOPPSCOTCH_APPLE_SIGNING_IDENTITY }}
           RUST_LOG: debug
-        run: pnpm --dir ${{ env.DESKTOP_PATH }} tauri build --verbose --target aarch64-apple-darwin
+        run: |
+          echo "Using shared tauri build helper"
+          bash scripts/ci/tauri-build.sh "${{ env.DESKTOP_PATH }}" aarch64-apple-darwin TAURI_SIGNING_PRIVATE_KEY
       - name: Build Tauri app without Apple signing
         if: ${{ inputs.disable_signing == true }}
         env:

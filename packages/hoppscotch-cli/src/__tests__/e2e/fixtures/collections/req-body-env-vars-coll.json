@@ -6,7 +6,7 @@
     {
       "v": "3",
       "name": "test-request",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "method": "POST",
       "headers": [],
       "params": [],

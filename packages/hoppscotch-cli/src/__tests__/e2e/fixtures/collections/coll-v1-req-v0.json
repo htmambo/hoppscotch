@@ -8,7 +8,7 @@
       "folders": [],
       "requests": [
         {
-          "url": "https://echo.hoppscotch.io",
+          "url": "https://www.hongshu.com",
           "path": "/get",
           "headers": [
             { "key": "Inactive-Header", "value": "Inactive Header", "active": false },
@@ -32,7 +32,7 @@
   ],
   "requests": [
     {
-      "url": "https://echo.hoppscotch.io",
+      "url": "https://www.hongshu.com",
       "path": "/get",
       "headers": [
         { "key": "Inactive-Header", "value": "Inactive Header", "active": false },

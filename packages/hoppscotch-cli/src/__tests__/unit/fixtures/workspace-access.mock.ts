@@ -44,7 +44,7 @@ export const WORKSPACE_DEEPLY_NESTED_COLLECTIONS_WITH_AUTH_HEADERS_VARIABLES_MOC
                       teamID: "clws3hg58000011o8h07glsb1",
                       title: "RequestD",
                       request:
-                        '{"v":"3","auth":{"authType":"basic","password":"password","username":"username","authActive":true},"body":{"body":null,"contentType":null},"name":"RequestD","method":"GET","params":[],"headers":[{"key":"X-Test-Header","value":"Overriden at RequestD","active":true}],"endpoint":"https://echo.hoppscotch.io","testScript":"pw.test(\\"Overrides auth and headers set at the parent folder\\", ()=> {\\n    pw.expect(pw.response.body.headers[\\"x-test-header\\"]).toBe(\\"Overriden at RequestD\\");\\n  pw.expect(pw.response.body.headers[\\"authorization\\"]).toBe(\\"Basic dXNlcm5hbWU6cGFzc3dvcmQ=\\");\\n});","preRequestScript":"","requestVariables":[]}',
+                        '{"v":"3","auth":{"authType":"basic","password":"password","username":"username","authActive":true},"body":{"body":null,"contentType":null},"name":"RequestD","method":"GET","params":[],"headers":[{"key":"X-Test-Header","value":"Overriden at RequestD","active":true}],"endpoint":"https://www.hongshu.com","testScript":"pw.test(\\"Overrides auth and headers set at the parent folder\\", ()=> {\\n    pw.expect(pw.response.body.headers[\\"x-test-header\\"]).toBe(\\"Overriden at RequestD\\");\\n  pw.expect(pw.response.body.headers[\\"authorization\\"]).toBe(\\"Basic dXNlcm5hbWU6cGFzc3dvcmQ=\\");\\n});","preRequestScript":"","requestVariables":[]}',
                     },
                   ],
                 },
@@ -56,7 +56,7 @@ export const WORKSPACE_DEEPLY_NESTED_COLLECTIONS_WITH_AUTH_HEADERS_VARIABLES_MOC
                   teamID: "clws3hg58000011o8h07glsb1",
                   title: "RequestC",
                   request:
-                    '{"v":"3","auth":{"authType":"inherit","authActive":true},"body":{"body":null,"contentType":null},"name":"RequestC","method":"GET","params":[],"headers":[],"endpoint":"https://echo.hoppscotch.io","testScript":"pw.test(\\"Correctly inherits auth and headers from the parent folder\\", ()=> {\\n    pw.expect(pw.response.body.headers[\\"x-test-header\\"]).toBe(\\"Overriden at FolderB\\");\\n  pw.expect(pw.response.body.headers[\\"key\\"]).toBe(\\"test-key\\");\\n});","preRequestScript":"","requestVariables":[]}',
+                    '{"v":"3","auth":{"authType":"inherit","authActive":true},"body":{"body":null,"contentType":null},"name":"RequestC","method":"GET","params":[],"headers":[],"endpoint":"https://www.hongshu.com","testScript":"pw.test(\\"Correctly inherits auth and headers from the parent folder\\", ()=> {\\n    pw.expect(pw.response.body.headers[\\"x-test-header\\"]).toBe(\\"Overriden at FolderB\\");\\n  pw.expect(pw.response.body.headers[\\"key\\"]).toBe(\\"test-key\\");\\n});","preRequestScript":"","requestVariables":[]}',
                 },
               ],
             },
@@ -68,7 +68,7 @@ export const WORKSPACE_DEEPLY_NESTED_COLLECTIONS_WITH_AUTH_HEADERS_VARIABLES_MOC
               teamID: "clws3hg58000011o8h07glsb1",
               title: "RequestB",
               request:
-                '{"v":"3","id":"clpttpdq00003qp16kut6doqv","auth":{"authType":"inherit","authActive":true},"body":{"body":null,"contentType":null},"name":"RequestB","method":"GET","params":[],"headers":[],"endpoint":"https://echo.hoppscotch.io","testScript":"pw.test(\\"Correctly inherits auth and headers from the parent folder\\", ()=> {\\n    pw.expect(pw.response.body.headers[\\"x-test-header\\"]).toBe(\\"Set at root collection\\");\\n  pw.expect(pw.response.body.headers[\\"authorization\\"]).toBe(\\"Bearer BearerToken\\");\\n});","preRequestScript":"","requestVariables":[]}',
+                '{"v":"3","id":"clpttpdq00003qp16kut6doqv","auth":{"authType":"inherit","authActive":true},"body":{"body":null,"contentType":null},"name":"RequestB","method":"GET","params":[],"headers":[],"endpoint":"https://www.hongshu.com","testScript":"pw.test(\\"Correctly inherits auth and headers from the parent folder\\", ()=> {\\n    pw.expect(pw.response.body.headers[\\"x-test-header\\"]).toBe(\\"Set at root collection\\");\\n  pw.expect(pw.response.body.headers[\\"authorization\\"]).toBe(\\"Bearer BearerToken\\");\\n});","preRequestScript":"","requestVariables":[]}',
             },
           ],
         },
@@ -79,7 +79,7 @@ export const WORKSPACE_DEEPLY_NESTED_COLLECTIONS_WITH_AUTH_HEADERS_VARIABLES_MOC
           collectionID: "clx1ldkzs005t10f8rp5u60q7",
           teamID: "clws3hg58000011o8h07glsb1",
           title: "RequestA",
-          request: `{"v":"${RESTReqSchemaVersion}","id":"clpttpdq00003qp16kut6doqv","auth":{"authType":"inherit","authActive":true},"body":{"body":null,"contentType":null},"name":"RequestA","method":"GET","params":[],"headers":[],"endpoint":"https://echo.hoppscotch.io","testScript":"pw.test(\\"Correctly inherits auth and headers from the root collection\\", ()=> {\\n    pw.expect(pw.response.body.headers[\\"x-test-header\\"]).toBe(\\"Set at root collection\\");\\n  pw.expect(pw.response.body.headers[\\"authorization\\"]).toBe(\\"Bearer BearerToken\\");\\n});","preRequestScript":"","requestVariables":[],"responses":{},"description":""}`,
+          request: `{"v":"${RESTReqSchemaVersion}","id":"clpttpdq00003qp16kut6doqv","auth":{"authType":"inherit","authActive":true},"body":{"body":null,"contentType":null},"name":"RequestA","method":"GET","params":[],"headers":[],"endpoint":"https://www.hongshu.com","testScript":"pw.test(\\"Correctly inherits auth and headers from the root collection\\", ()=> {\\n    pw.expect(pw.response.body.headers[\\"x-test-header\\"]).toBe(\\"Set at root collection\\");\\n  pw.expect(pw.response.body.headers[\\"authorization\\"]).toBe(\\"Bearer BearerToken\\");\\n});","preRequestScript":"","requestVariables":[],"responses":{},"description":""}`,
         },
       ],
     },
@@ -130,7 +130,7 @@ export const TRANSFORMED_DEEPLY_NESTED_COLLECTIONS_WITH_AUTH_HEADERS_VARIABLES_M
                           active: true,
                         },
                       ],
-                      endpoint: "https://echo.hoppscotch.io",
+                      endpoint: "https://www.hongshu.com",
                       testScript:
                         'pw.test("Overrides auth and headers set at the parent folder", ()=> {\n    pw.expect(pw.response.body.headers["x-test-header"]).toBe("Overriden at RequestD");\n  pw.expect(pw.response.body.headers["authorization"]).toBe("Basic dXNlcm5hbWU6cGFzc3dvcmQ=");\n});',
                       preRequestScript: "",
@@ -161,7 +161,7 @@ export const TRANSFORMED_DEEPLY_NESTED_COLLECTIONS_WITH_AUTH_HEADERS_VARIABLES_M
                   method: "GET",
                   params: [],
                   headers: [],
-                  endpoint: "https://echo.hoppscotch.io",
+                  endpoint: "https://www.hongshu.com",
                   testScript:
                     'pw.test("Correctly inherits auth and headers from the parent folder", ()=> {\n    pw.expect(pw.response.body.headers["x-test-header"]).toBe("Overriden at FolderB");\n  pw.expect(pw.response.body.headers["key"]).toBe("test-key");\n});',
                   preRequestScript: "",
@@ -210,7 +210,7 @@ export const TRANSFORMED_DEEPLY_NESTED_COLLECTIONS_WITH_AUTH_HEADERS_VARIABLES_M
               method: "GET",
               params: [],
               headers: [],
-              endpoint: "https://echo.hoppscotch.io",
+              endpoint: "https://www.hongshu.com",
               testScript:
                 'pw.test("Correctly inherits auth and headers from the parent folder", ()=> {\n    pw.expect(pw.response.body.headers["x-test-header"]).toBe("Set at root collection");\n  pw.expect(pw.response.body.headers["authorization"]).toBe("Bearer BearerToken");\n});',
               preRequestScript: "",
@@ -242,7 +242,7 @@ export const TRANSFORMED_DEEPLY_NESTED_COLLECTIONS_WITH_AUTH_HEADERS_VARIABLES_M
           method: "GET",
           params: [],
           headers: [],
-          endpoint: "https://echo.hoppscotch.io",
+          endpoint: "https://www.hongshu.com",
           testScript:
             'pw.test("Correctly inherits auth and headers from the root collection", ()=> {\n    pw.expect(pw.response.body.headers["x-test-header"]).toBe("Set at root collection");\n  pw.expect(pw.response.body.headers["authorization"]).toBe("Bearer BearerToken");\n});',
           preRequestScript: "",
@@ -1346,7 +1346,7 @@ export const WORKSPACE_COLLECTIONS_WITHOUT_AUTH_HEADERS_VARIABLES_AT_CERTAIN_LEV
               teamID: "clws3hg58000011o8h07glsb1",
               title: "req1",
               request:
-                '{"v":"4","auth":{"authType":"inherit","authActive":true},"body":{"body":null,"contentType":null},"name":"req1","method":"GET","params":[],"headers":[],"endpoint":"https://echo.hoppscotch.io","testScript":"","preRequestScript":"","requestVariables":[]}',
+                '{"v":"4","auth":{"authType":"inherit","authActive":true},"body":{"body":null,"contentType":null},"name":"req1","method":"GET","params":[],"headers":[],"endpoint":"https://www.hongshu.com","testScript":"","preRequestScript":"","requestVariables":[]}',
             },
           ],
         },
@@ -1363,7 +1363,7 @@ export const WORKSPACE_COLLECTIONS_WITHOUT_AUTH_HEADERS_VARIABLES_AT_CERTAIN_LEV
               teamID: "clws3hg58000011o8h07glsb1",
               title: "req2",
               request:
-                '{"v":"4","auth":{"authType":"inherit","authActive":true},"body":{"body":null,"contentType":null},"name":"req2","method":"GET","params":[],"headers":[],"endpoint":"https://echo.hoppscotch.io","testScript":"","preRequestScript":"","requestVariables":[]}',
+                '{"v":"4","auth":{"authType":"inherit","authActive":true},"body":{"body":null,"contentType":null},"name":"req2","method":"GET","params":[],"headers":[],"endpoint":"https://www.hongshu.com","testScript":"","preRequestScript":"","requestVariables":[]}',
             },
           ],
         },
@@ -1415,7 +1415,7 @@ export const TRANSFORMED_COLLECTIONS_WITHOUT_AUTH_HEADERS_VARIABLES_AT_CERTAIN_L
               method: "GET",
               params: [],
               headers: [],
-              endpoint: "https://echo.hoppscotch.io",
+              endpoint: "https://www.hongshu.com",
               testScript: "",
               preRequestScript: "",
               requestVariables: [],
@@ -1449,7 +1449,7 @@ export const TRANSFORMED_COLLECTIONS_WITHOUT_AUTH_HEADERS_VARIABLES_AT_CERTAIN_L
               method: "GET",
               params: [],
               headers: [],
-              endpoint: "https://echo.hoppscotch.io",
+              endpoint: "https://www.hongshu.com",
               testScript: "",
               preRequestScript: "",
               requestVariables: [],

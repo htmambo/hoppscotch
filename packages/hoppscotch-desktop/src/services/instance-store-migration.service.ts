@@ -39,16 +39,6 @@ type LegacyConnectionState =
   | { status: "connected"; instance: LegacyInstanceKind }
   | { status: "error"; target: string; message: string }
 
-type LegacyUpdateState = {
-  status: string
-  version?: string
-  message?: string
-  progress?: {
-    downloaded: number
-    total?: number
-  }
-}
-
 export type InstanceKind = "on-prem" | "cloud" | "cloud-org" | "vendored"
 
 export type Instance = {
@@ -222,7 +212,6 @@ export class InstanceStoreMigrationService {
 
     let connectionState: ConnectionState = { status: "idle" }
     let recentInstances: Instance[] = []
-    let updateState: any = null
 
     // Read from hopp.store.json if it exists
     try {
@@ -268,8 +257,6 @@ export class InstanceStoreMigrationService {
             }
           }
         }
-
-        updateState = await desktopStore.get<LegacyUpdateState>("updateState")
       }
     } catch (error) {
       console.log("Could not read hoppscotch-desktop.store:", error)
@@ -287,15 +274,6 @@ export class InstanceStoreMigrationService {
       console.log(`Migrated ${recentInstances.length} recent instances`)
     } catch (error) {
       console.error("Failed to save recent instances:", error)
-    }
-
-    if (updateState) {
-      try {
-        await Store.set(STORE_NAMESPACE, "updateState", updateState)
-        console.log("Migrated update state")
-      } catch (error) {
-        console.error("Failed to save update state:", error)
-      }
     }
   }
 

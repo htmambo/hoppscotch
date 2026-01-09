@@ -253,7 +253,7 @@ export function getDefaultRESTRequest(): HoppRESTRequest {
   const ref_id = generateUniqueRefId("req")
   return {
     v: RESTReqSchemaVersion,
-    endpoint: "https://echo.hoppscotch.io",
+    endpoint: "https://www.hongshu.com",
     name: "Untitled",
     params: [],
     headers: [],

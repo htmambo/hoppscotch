@@ -18,7 +18,7 @@
                 "requests": [
                   {
                     "v": "3",
-                    "endpoint": "https://echo.hoppscotch.io",
+                    "endpoint": "https://www.hongshu.com",
                     "name": "RequestD",
                     "params": [],
                     "headers": [
@@ -54,7 +54,7 @@
             "requests": [
               {
                 "v": "3",
-                "endpoint": "https://echo.hoppscotch.io",
+                "endpoint": "https://www.hongshu.com",
                 "name": "RequestC",
                 "params": [],
                 "headers": [],
@@ -91,7 +91,7 @@
         "requests": [
           {
             "v": "3",
-            "endpoint": "https://echo.hoppscotch.io",
+            "endpoint": "https://www.hongshu.com",
             "name": "RequestB",
             "params": [],
             "headers": [],
@@ -120,7 +120,7 @@
     "requests": [
       {
         "v": "3",
-        "endpoint": "https://echo.hoppscotch.io",
+        "endpoint": "https://www.hongshu.com",
         "name": "RequestA",
         "params": [],
         "headers": [],
@@ -163,7 +163,7 @@
         "requests": [
           {
             "v": "3",
-            "endpoint": "https://echo.hoppscotch.io",
+            "endpoint": "https://www.hongshu.com",
             "name": "RequestB",
             "params": [],
             "headers": [],
@@ -192,7 +192,7 @@
     "requests": [
       {
         "v": "3",
-        "endpoint": "https://echo.hoppscotch.io",
+        "endpoint": "https://www.hongshu.com",
         "name": "RequestA",
         "params": [],
         "headers": [],

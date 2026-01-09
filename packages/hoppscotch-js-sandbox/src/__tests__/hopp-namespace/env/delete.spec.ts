@@ -9,8 +9,8 @@ describe("hopp.env.delete", () => {
         selected: [
           {
             key: "baseUrl",
-            currentValue: "https://echo.hoppscotch.io",
-            initialValue: "https://echo.hoppscotch.io",
+            currentValue: "https://www.hongshu.com",
+            initialValue: "https://www.hongshu.com",
             secret: false,
           },
         ],
@@ -23,8 +23,8 @@ describe("hopp.env.delete", () => {
         global: [
           {
             key: "baseUrl",
-            currentValue: "https://echo.hoppscotch.io",
-            initialValue: "https://echo.hoppscotch.io",
+            currentValue: "https://www.hongshu.com",
+            initialValue: "https://www.hongshu.com",
             secret: false,
           },
         ],
@@ -46,8 +46,8 @@ describe("hopp.env.delete", () => {
         selected: [
           {
             key: "baseUrl",
-            currentValue: "https://echo.hoppscotch.io",
-            initialValue: "https://echo.hoppscotch.io",
+            currentValue: "https://www.hongshu.com",
+            initialValue: "https://www.hongshu.com",
             secret: false,
           },
         ],
@@ -72,8 +72,8 @@ describe("hopp.env.delete", () => {
         global: [
           {
             key: "baseUrl",
-            currentValue: "https://echo.hoppscotch.io",
-            initialValue: "https://echo.hoppscotch.io",
+            currentValue: "https://www.hongshu.com",
+            initialValue: "https://www.hongshu.com",
             secret: false,
           },
         ],
@@ -86,8 +86,8 @@ describe("hopp.env.delete", () => {
           },
           {
             key: "baseUrl",
-            currentValue: "https://echo.hoppscotch.io",
-            initialValue: "https://echo.hoppscotch.io",
+            currentValue: "https://www.hongshu.com",
+            initialValue: "https://www.hongshu.com",
             secret: false,
           },
         ],
@@ -97,16 +97,16 @@ describe("hopp.env.delete", () => {
         global: [
           {
             key: "baseUrl",
-            currentValue: "https://echo.hoppscotch.io",
-            initialValue: "https://echo.hoppscotch.io",
+            currentValue: "https://www.hongshu.com",
+            initialValue: "https://www.hongshu.com",
             secret: false,
           },
         ],
         selected: [
           {
             key: "baseUrl",
-            currentValue: "https://echo.hoppscotch.io",
-            initialValue: "https://echo.hoppscotch.io",
+            currentValue: "https://www.hongshu.com",
+            initialValue: "https://www.hongshu.com",
             secret: false,
           },
         ],
@@ -125,8 +125,8 @@ describe("hopp.env.delete", () => {
           },
           {
             key: "baseUrl",
-            currentValue: "https://echo.hoppscotch.io",
-            initialValue: "https://echo.hoppscotch.io",
+            currentValue: "https://www.hongshu.com",
+            initialValue: "https://www.hongshu.com",
             secret: false,
           },
         ],
@@ -137,8 +137,8 @@ describe("hopp.env.delete", () => {
         global: [
           {
             key: "baseUrl",
-            currentValue: "https://echo.hoppscotch.io",
-            initialValue: "https://echo.hoppscotch.io",
+            currentValue: "https://www.hongshu.com",
+            initialValue: "https://www.hongshu.com",
             secret: false,
           },
         ],
@@ -173,8 +173,8 @@ describe("hopp.env.delete", () => {
           selected: [
             {
               key: "baseUrl",
-              currentValue: "https://echo.hoppscotch.io",
-              initialValue: "https://echo.hoppscotch.io",
+              currentValue: "https://www.hongshu.com",
+              initialValue: "https://www.hongshu.com",
               secret: false,
             },
           ],

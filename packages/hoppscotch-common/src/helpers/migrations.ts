@@ -10,6 +10,6 @@ export function performMigrations(): void {
   if (
     settingsStore.value.PROXY_URL === "https://hoppscotch.apollosoftware.xyz/"
   ) {
-    applySetting("PROXY_URL", "https://proxy.hoppscotch.io/")
+    applySetting("PROXY_URL", "http://127.0.0.1:7890")
   }
 }

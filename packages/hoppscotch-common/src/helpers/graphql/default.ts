@@ -20,7 +20,7 @@ const DEFAULT_QUERY = print(
 export const getDefaultGQLRequest = (): HoppGQLRequest => ({
   v: GQL_REQ_SCHEMA_VERSION,
   name: "Untitled",
-  url: "https://echo.hoppscotch.io/graphql",
+  url: "https://www.hongshu.com/graphql",
   headers: [],
   variables: `{
   "id": "1"

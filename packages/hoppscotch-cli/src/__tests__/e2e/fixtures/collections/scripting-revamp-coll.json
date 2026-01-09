@@ -9,7 +9,7 @@
       "id": "cmfhzf0oo0092qt0if5rvd2g4",
       "name": "json-response-test",
       "method": "POST",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [
         {
@@ -67,7 +67,7 @@
       "id": "cmfhzf0op0094qt0ixbo9rqnw",
       "name": "environment-variables-test",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "hopp.env.set('test_key', 'test_value')\nhopp.env.set('recursive_key', '<<test_key>>')\nhopp.env.global.set('global_key', 'global_value')\nhopp.env.active.set('active_key', 'active_value')\n\n// `pm` namespace equivalents\npm.variables.set('pm_test_key', 'pm_test_value')\npm.environment.set('pm_active_key', 'pm_active_value')\npm.globals.set('pm_global_key', 'pm_global_value')\n",
@@ -89,7 +89,7 @@
       "id": "cmfhzf0op0095qt0ieogkxx1w",
       "name": "request-modification-test",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [
         {
           "key": "original_param",
@@ -106,7 +106,7 @@
           "description": ""
         }
       ],
-      "preRequestScript": "hopp.request.setUrl('https://echo.hoppscotch.io/modified')\nhopp.request.setMethod('POST')\nhopp.request.setHeader('Modified-Header', 'modified_value')\nhopp.request.setParam('new_param', 'new_value')\n\nhopp.request.setBody({\n  contentType: 'application/json',\n  body: JSON.stringify({ modified: true, timestamp: Date.now() })\n})\n\nhopp.request.setAuth({\n  authType: 'bearer',\n  token: 'test-bearer-token',\n  authActive: true\n})",
+      "preRequestScript": "hopp.request.setUrl('https://www.hongshu.com/modified')\nhopp.request.setMethod('POST')\nhopp.request.setHeader('Modified-Header', 'modified_value')\nhopp.request.setParam('new_param', 'new_value')\n\nhopp.request.setBody({\n  contentType: 'application/json',\n  body: JSON.stringify({ modified: true, timestamp: Date.now() })\n})\n\nhopp.request.setAuth({\n  authType: 'bearer',\n  token: 'test-bearer-token',\n  authActive: true\n})",
       "testScript": "\nhopp.test('Request URL was modified by pre-request script', () => {\n    hopp.expect(hopp.request.url).toInclude('/modified')\n    pm.expect(pm.request.url.toString()).toInclude('/modified')\n})\n\nhopp.test('Request method was modified by pre-request script', () => {\n    hopp.expect(hopp.request.method).toBe('POST')\n    pm.expect(pm.request.method).toBe('POST')\n})\n\nhopp.test('Request headers contain both original and modified headers', () => {\n    const headers = hopp.request.headers\n    const hasOriginal = headers.some(h => h.key === 'Original-Header')\n    const hasModified = headers.some(h => h.key === 'Modified-Header')\n    hopp.expect(hasOriginal).toBe(true)\n    hopp.expect(hasModified).toBe(true)\n})\n\npm.test('PM request headers can be accessed and checked', () => {\n    pm.expect(pm.request.headers.has('Original-Header')).toBe(true)\n    pm.expect(pm.request.headers.has('Modified-Header')).toBe(true)\n    pm.expect(pm.request.headers.get('Modified-Header')).toBe('modified_value')\n})\n\nhopp.test('Request parameters contain both original and new parameters', () => {\n    const params = hopp.request.params\n    const hasOriginal = params.some(p => p.key === 'original_param')\n    const hasNew = params.some(p => p.key === 'new_param')\n    hopp.expect(hasOriginal).toBe(true)\n    hopp.expect(hasNew).toBe(true)\n})\n\nhopp.test('Request body was modified by pre-request script', () => {\n    hopp.expect(hopp.request.body.contentType).toBe('application/json')\n    pm.expect(pm.request.body.contentType).toBe('application/json')\n    const bodyData = hopp.request.body\n\n    if (typeof bodyData.body === \"string\") {\n        hopp.expect(JSON.parse(bodyData.body).modified).toBe(true)\n        pm.expect(JSON.parse(bodyData.body).modified).toBe(true)\n    } else {\n        throw new Error(`Unexpected body type: ${bodyData.body}`)\n    }\n})\n\n\nhopp.test('Request auth was modified by pre-request script', () => {\n    const auth = hopp.request.auth\n\n    if (auth.authType === 'bearer') {\n        hopp.expect(auth.token).toBe('test-bearer-token')\n        pm.expect(auth.token).toBe('test-bearer-token')\n    } else {\n        throw new Error(`Unexpected auth type: ${auth.authType}`)\n    }\n\n    hopp.expect(auth.token).toBe('test-bearer-token')\n    pm.expect(auth.token).toBe('test-bearer-token')\n})\n\n",
       "auth": {
         "authType": "none",
@@ -125,7 +125,7 @@
       "id": "cmfhzf0op0096qt0i6wellfus",
       "name": "response-parsing-test",
       "method": "POST",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [
         {
@@ -154,7 +154,7 @@
       "id": "cmfhzf0op0097qt0ia4wf0lej",
       "name": "request-variables-test",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "// Test request variables\nhopp.request.variables.set('dynamic_var', 'dynamic_value')\nhopp.request.variables.set('calculated_var', `timestamp_${Date.now()}`)",
@@ -192,7 +192,7 @@
       "id": "cmfhzf0op0098qt0ii9fguj6e",
       "name": "info-context-test",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
@@ -214,7 +214,7 @@
       "id": "cmfhzf0op0099qt0iamthw97r",
       "name": "pm-namespace-additional-test",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "// Test `pm` namespace specific features\npm.environment.set('pm_pre_key', 'pm_pre_value')\npm.globals.set('pm_global_pre', 'pm_global_pre_value')\npm.variables.set('pm_var_pre', 'pm_var_pre_value')\n",
@@ -236,7 +236,7 @@
       "id": "cmfhzf0op009aqt0inw3j6dq9",
       "name": "expectation-methods-test",
       "method": "POST",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
@@ -258,7 +258,7 @@
       "id": "cmfhzf0op00chai1qt0inext01",
       "name": "chai-assertions-hopp-extended",
       "method": "POST",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
@@ -280,7 +280,7 @@
       "id": "cmfhzf0op00chai2qt0inext02",
       "name": "chai-assertions-pm-parity",
       "method": "POST",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
@@ -302,7 +302,7 @@
       "id": "cmfhzf0op00cookies01",
       "name": "cookie-assertions-test",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [
         {
@@ -331,7 +331,7 @@
       "id": "cmfhzf0op00schema01",
       "name": "json-schema-validation-test",
       "method": "POST",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
@@ -353,7 +353,7 @@
       "id": "cmfhzf0op00charset01",
       "name": "charset-validation-test",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
@@ -375,7 +375,7 @@
       "id": "cmfhzf0op00jsonpath01",
       "name": "jsonpath-query-test",
       "method": "POST",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
@@ -397,7 +397,7 @@
       "id": "cmfhzf0op00envext01",
       "name": "environment-extensions-test",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "pm.environment.set('template_var', 'world')\npm.environment.set('user_id', '12345')\npm.globals.set('api_base', 'https://api.example.com')\npm.globals.set('version', 'v2')\n",
@@ -419,7 +419,7 @@
       "id": "cmfhzf0op00respext01",
       "name": "response-extensions-test",
       "method": "POST",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
@@ -441,7 +441,7 @@
       "id": "cmfhzf0op00execext01",
       "name": "execution-context-test",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
@@ -463,7 +463,7 @@
       "id": "cmfhzf0op00bddassert01",
       "name": "bdd-response-assertions-test",
       "method": "POST",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [
         {
@@ -492,7 +492,7 @@
       "id": "cmfhzf0op00includecontain01",
       "name": "include-contain-assertions-test",
       "method": "POST",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
@@ -514,7 +514,7 @@
       "id": "cmfhzf0op00envunsetclear01",
       "name": "environment-unset-clear-test",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "pm.environment.set('to_unset1', 'value1')\npm.environment.set('to_unset2', 'value2')\npm.environment.set('to_clear1', 'clear_value1')\npm.environment.set('to_clear2', 'clear_value2')\npm.environment.set('to_clear3', 'clear_value3')\npm.globals.set('global_to_unset', 'global_value')\npm.globals.set('global_to_clear1', 'global_clear1')\npm.globals.set('global_to_clear2', 'global_clear2')\n",
@@ -536,7 +536,7 @@
       "id": "cmfhzf0op00pmmutate01",
       "name": "pm-request-mutation-test",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io/original",
+      "endpoint": "https://www.hongshu.com/original",
       "params": [
         {
           "key": "original_param",
@@ -553,7 +553,7 @@
           "description": ""
         }
       ],
-      "preRequestScript": "// Test PM namespace mutability - URL string assignment\npm.request.url = 'https://echo.hoppscotch.io/mutated-via-string'\n\n// Test method mutation\npm.request.method = 'POST'\n\n// Test header mutations\npm.request.headers.add({ key: 'Added-Header', value: 'added-value' })\npm.request.headers.upsert({ key: 'Original-Header', value: 'mutated-value' })\n\n// Test body mutation via update()\npm.request.body.update({\n  mode: 'raw',\n  raw: JSON.stringify({ pmMutated: true, timestamp: Date.now() }),\n  options: { raw: { language: 'json' } }\n})\n\n// Test auth mutation\npm.request.auth = {\n  authType: 'bearer',\n  authActive: true,\n  token: 'pm-bearer-token-123'\n}\n",
+      "preRequestScript": "// Test PM namespace mutability - URL string assignment\npm.request.url = 'https://www.hongshu.com/mutated-via-string'\n\n// Test method mutation\npm.request.method = 'POST'\n\n// Test header mutations\npm.request.headers.add({ key: 'Added-Header', value: 'added-value' })\npm.request.headers.upsert({ key: 'Original-Header', value: 'mutated-value' })\n\n// Test body mutation via update()\npm.request.body.update({\n  mode: 'raw',\n  raw: JSON.stringify({ pmMutated: true, timestamp: Date.now() }),\n  options: { raw: { language: 'json' } }\n})\n\n// Test auth mutation\npm.request.auth = {\n  authType: 'bearer',\n  authActive: true,\n  token: 'pm-bearer-token-123'\n}\n",
       "testScript": "\npm.test('pm.request.url string assignment was applied', () => {\n  const urlString = pm.request.url.toString()\n  pm.expect(urlString).to.include('/mutated-via-string')\n  pm.expect(urlString).to.not.include('/original')\n})\n\npm.test('pm.request.method mutation was applied', () => {\n  pm.expect(pm.request.method).to.equal('POST')\n  pm.expect(pm.request.method).to.not.equal('GET')\n})\n\npm.test('pm.request.headers.add() added new header', () => {\n  pm.expect(pm.request.headers.has('Added-Header')).to.be.true\n  pm.expect(pm.request.headers.get('Added-Header')).to.equal('added-value')\n})\n\npm.test('pm.request.headers.upsert() updated existing header', () => {\n  pm.expect(pm.request.headers.has('Original-Header')).to.be.true\n  pm.expect(pm.request.headers.get('Original-Header')).to.equal('mutated-value')\n  pm.expect(pm.request.headers.get('Original-Header')).to.not.equal('original')\n})\n\npm.test('pm.request.body.update() changed body content', () => {\n  pm.expect(pm.request.body.contentType).to.equal('application/json')\n  const bodyString = typeof pm.request.body.body === 'string' \n    ? pm.request.body.body \n    : JSON.stringify(pm.request.body.body)\n  pm.expect(bodyString).to.include('pmMutated')\n  const bodyData = JSON.parse(bodyString)\n  pm.expect(bodyData.pmMutated).to.be.true\n})\n\npm.test('pm.request.auth mutation was applied', () => {\n  pm.expect(pm.request.auth.authType).to.equal('bearer')\n  pm.expect(pm.request.auth.token).to.equal('pm-bearer-token-123')\n})\n\npm.test('pm.request.id and pm.request.name are accessible', () => {\n  pm.expect(pm.request.id).to.be.a('string')\n  pm.expect(pm.request.id.length).to.be.above(0)\n  pm.expect(pm.request.name).to.equal('pm-request-mutation-test')\n})\n\nhopp.test('hopp.request reflects pm namespace mutations', () => {\n  hopp.expect(hopp.request.url).toInclude('/mutated-via-string')\n  hopp.expect(hopp.request.method).toBe('POST')\n  const hasAddedHeader = hopp.request.headers.some(h => h.key === 'Added-Header')\n  hopp.expect(hasAddedHeader).toBe(true)\n})\n",
       "auth": {
         "authType": "none",
@@ -572,7 +572,7 @@
       "id": "cmfhzf0op00urlmutate01",
       "name": "pm-url-property-mutations-test",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io/original?old=value",
+      "endpoint": "https://www.hongshu.com/original?old=value",
       "params": [],
       "headers": [],
       "preRequestScript": "// Test URL object property mutations\npm.request.url.protocol = 'http'\npm.request.url.host = ['echo', 'hoppscotch', 'io']\npm.request.url.path = ['v2', 'test']\npm.request.url.port = '443'\npm.request.url.query.add({ key: 'new', value: 'param' })\npm.request.url.query.remove('old')\n",
@@ -594,7 +594,7 @@
       "id": "cmfhzf0op00unsupported01",
       "name": "unsupported-features-test",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
@@ -657,7 +657,7 @@
           "description": ""
         }
       ],
-      "preRequestScript": "// Test URL helper methods\npm.request.url.update('https://echo.hoppscotch.io/updated?test=value')\npm.request.url.addQueryParams([{ key: 'page', value: '1' }, { key: 'limit', value: '20' }])\npm.request.url.removeQueryParams('test')\n\n// Test hostname and hash properties\npm.request.url.hostname = 'echo.hoppscotch.io'\npm.request.url.hash = 'results'\n\n// Test query PropertyList methods\npm.request.url.query.upsert({ key: 'status', value: 'published' })\npm.request.url.query.add({ key: 'include', value: 'metadata' })\n",
+      "preRequestScript": "// Test URL helper methods\npm.request.url.update('https://www.hongshu.com/updated?test=value')\npm.request.url.addQueryParams([{ key: 'page', value: '1' }, { key: 'limit', value: '20' }])\npm.request.url.removeQueryParams('test')\n\n// Test hostname and hash properties\npm.request.url.hostname = 'echo.hoppscotch.io'\npm.request.url.hash = 'results'\n\n// Test query PropertyList methods\npm.request.url.query.upsert({ key: 'status', value: 'published' })\npm.request.url.query.add({ key: 'include', value: 'metadata' })\n",
       "testScript": "\npm.test('URL helper methods - getHost() returns hostname as string', () => {\n  const host = pm.request.url.getHost()\n  pm.expect(host).to.be.a('string')\n  pm.expect(host).to.equal('echo.hoppscotch.io')\n})\n\npm.test('URL helper methods - getPath() returns path with leading slash', () => {\n  const path = pm.request.url.getPath()\n  pm.expect(path).to.be.a('string')\n  pm.expect(path).to.include('/')\n  pm.expect(path).to.equal('/updated')\n})\n\npm.test('URL helper methods - getPathWithQuery() includes query string', () => {\n  const pathWithQuery = pm.request.url.getPathWithQuery()\n  pm.expect(pathWithQuery).to.include('?')\n  pm.expect(pathWithQuery).to.include('page=1')\n  pm.expect(pathWithQuery).to.include('limit=20')\n})\n\npm.test('URL helper methods - getQueryString() returns query without ?', () => {\n  const queryString = pm.request.url.getQueryString()\n  pm.expect(queryString).to.be.a('string')\n  pm.expect(queryString).to.not.include('?')\n  pm.expect(queryString).to.include('page=1')\n})\n\npm.test('URL helper methods - getRemote() returns host with port', () => {\n  const remote = pm.request.url.getRemote()\n  pm.expect(remote).to.be.a('string')\n  pm.expect(remote).to.equal('echo.hoppscotch.io')\n})\n\npm.test('URL helper methods - update() changes entire URL', () => {\n  const url = pm.request.url.toString()\n  pm.expect(url).to.include('echo.hoppscotch.io')\n  pm.expect(url).to.include('/updated')\n})\n\npm.test('URL helper methods - addQueryParams() adds multiple params', () => {\n  const allParams = pm.request.url.query.all()\n  pm.expect(allParams).to.have.property('page', '1')\n  pm.expect(allParams).to.have.property('limit', '20')\n})\n\npm.test('URL helper methods - removeQueryParams() removes params', () => {\n  const allParams = pm.request.url.query.all()\n  pm.expect(allParams).to.not.have.property('test')\n})\n\npm.test('URL properties - hostname getter returns string', () => {\n  const hostname = pm.request.url.hostname\n  pm.expect(hostname).to.be.a('string')\n  pm.expect(hostname).to.equal('echo.hoppscotch.io')\n})\n\npm.test('URL properties - hostname matches host array', () => {\n  const hostname = pm.request.url.hostname\n  const hostString = pm.request.url.host.join('.')\n  pm.expect(hostname).to.equal(hostString)\n})\n\npm.test('URL properties - hash getter returns string', () => {\n  const hash = pm.request.url.hash\n  pm.expect(hash).to.be.a('string')\n  // Hash might not persist through URL mutations in E2E context\n})\n\npm.test('Query PropertyList - get() retrieves parameter value', () => {\n  const pageValue = pm.request.url.query.get('page')\n  pm.expect(pageValue).to.equal('1')\n})\n\npm.test('Query PropertyList - has() checks parameter existence', () => {\n  pm.expect(pm.request.url.query.has('page')).to.be.true\n  pm.expect(pm.request.url.query.has('nonexistent')).to.be.false\n})\n\npm.test('Query PropertyList - upsert() adds/updates parameter', () => {\n  pm.expect(pm.request.url.query.has('status')).to.be.true\n  pm.expect(pm.request.url.query.get('status')).to.equal('published')\n})\n\npm.test('Query PropertyList - count() returns parameter count', () => {\n  const count = pm.request.url.query.count()\n  pm.expect(count).to.be.a('number')\n  pm.expect(count).to.be.above(0)\n})\n\npm.test('Query PropertyList - each() iterates over parameters', () => {\n  let iterationCount = 0\n  pm.request.url.query.each((param) => {\n    pm.expect(param).to.have.property('key')\n    pm.expect(param).to.have.property('value')\n    iterationCount++\n  })\n  pm.expect(iterationCount).to.be.above(0)\n})\n\npm.test('Query PropertyList - map() transforms parameters', () => {\n  const keys = pm.request.url.query.map((param) => param.key)\n  pm.expect(keys).to.be.an('array')\n  pm.expect(keys).to.include('page')\n  pm.expect(keys).to.include('limit')\n})\n\npm.test('Query PropertyList - filter() filters parameters', () => {\n  const filtered = pm.request.url.query.filter((param) => param.key === 'page')\n  pm.expect(filtered).to.be.an('array')\n  pm.expect(filtered.length).to.be.above(0)\n  pm.expect(filtered[0].key).to.equal('page')\n})\n\npm.test('Query PropertyList - idx() accesses by index', () => {\n  const firstParam = pm.request.url.query.idx(0)\n  pm.expect(firstParam).to.be.an('object')\n  pm.expect(firstParam).to.have.property('key')\n  pm.expect(firstParam).to.have.property('value')\n})\n\npm.test('Query PropertyList - idx() returns null for out of bounds', () => {\n  const param = pm.request.url.query.idx(999)\n  pm.expect(param).to.be.null\n})\n\npm.test('Query PropertyList - toObject() returns object', () => {\n  const obj = pm.request.url.query.toObject()\n  pm.expect(obj).to.be.an('object')\n  pm.expect(obj).to.have.property('page')\n})\n\npm.test('Headers PropertyList - each() iterates over headers', () => {\n  let count = 0\n  pm.request.headers.each((header) => {\n    pm.expect(header).to.have.property('key')\n    pm.expect(header).to.have.property('value')\n    count++\n  })\n  pm.expect(count).to.be.above(0)\n})\n\npm.test('Headers PropertyList - map() transforms headers', () => {\n  const keys = pm.request.headers.map((h) => h.key)\n  pm.expect(keys).to.be.an('array')\n  pm.expect(keys).to.include('Content-Type')\n})\n\npm.test('Headers PropertyList - filter() filters headers', () => {\n  const filtered = pm.request.headers.filter((h) => h.key === 'Content-Type')\n  pm.expect(filtered).to.be.an('array')\n  pm.expect(filtered.length).to.be.above(0)\n})\n\npm.test('Headers PropertyList - count() returns header count', () => {\n  const count = pm.request.headers.count()\n  pm.expect(count).to.be.a('number')\n  pm.expect(count).to.be.above(0)\n})\n\npm.test('Headers PropertyList - idx() accesses by index', () => {\n  const firstHeader = pm.request.headers.idx(0)\n  pm.expect(firstHeader).to.be.an('object')\n  pm.expect(firstHeader).to.have.property('key')\n})\n\npm.test('Headers PropertyList - toObject() returns object', () => {\n  const obj = pm.request.headers.toObject()\n  pm.expect(obj).to.be.an('object')\n  pm.expect(obj).to.have.property('Content-Type')\n})\n\nhopp.test('hopp namespace URL methods work identically', () => {\n  const url = hopp.request.url\n  hopp.expect(url).toInclude('echo.hoppscotch.io')\n  hopp.expect(url).toInclude('/updated')\n})\n",
       "auth": {
         "authType": "inherit",
@@ -675,7 +675,7 @@
       "v": "16",
       "name": "propertylist-advanced-methods-test",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io/propertylist",
+      "endpoint": "https://www.hongshu.com/propertylist",
       "params": [
         {
           "key": "filter",
@@ -729,7 +729,7 @@
       "id": "advanced-response-methods-test",
       "name": "advanced-response-methods-test",
       "method": "POST",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [
         {
@@ -758,7 +758,7 @@
       "id": "advanced-chai-map-set-test",
       "name": "advanced-chai-map-set-test",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "export {};",
@@ -780,7 +780,7 @@
       "id": "cmfhzf0op00typecoer01",
       "name": "type-preservation-test",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "// For CLI E2E testing: We only set simple string values in pre-request\n// Complex types will be tested within the test script itself\n\npm.environment.set('string_value', 'hello')\n",
@@ -801,7 +801,7 @@
       "id": "type_preservation_ui_compat",
       "name": "type-preservation-ui-compatibility-test",
       "method": "POST",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "// Type preservation tests run in test script scope",
@@ -823,11 +823,11 @@
       "id": "fetch-get-basic",
       "name": "hopp.fetch() - GET request basic",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io/status/200",
+      "endpoint": "https://www.hongshu.com/status/200",
       "params": [],
       "headers": [],
       "preRequestScript": "",
-      "testScript": "hopp.test('hopp.fetch() should make successful GET request', async () => {\n  const response = await hopp.fetch('https://echo.hoppscotch.io/status/200')\n  hopp.expect(response.status).toBe(200)\n  hopp.expect(response.ok).toBe(true)\n  hopp.expect(response.statusText).toBeType('string')\n})\n",
+      "testScript": "hopp.test('hopp.fetch() should make successful GET request', async () => {\n  const response = await hopp.fetch('https://www.hongshu.com/status/200')\n  hopp.expect(response.status).toBe(200)\n  hopp.expect(response.ok).toBe(true)\n  hopp.expect(response.statusText).toBeType('string')\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -844,11 +844,11 @@
       "id": "fetch-post-json",
       "name": "hopp.fetch() - POST with JSON body",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
-      "testScript": "hopp.test('hopp.fetch() should POST JSON data', async () => {\n  const response = await hopp.fetch('https://echo.hoppscotch.io/post', {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ test: 'data', number: 42 })\n  })\n  hopp.expect(response.status).toBe(200)\n  hopp.expect(response.ok).toBe(true)\n})\n",
+      "testScript": "hopp.test('hopp.fetch() should POST JSON data', async () => {\n  const response = await hopp.fetch('https://www.hongshu.com/post', {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ test: 'data', number: 42 })\n  })\n  hopp.expect(response.status).toBe(200)\n  hopp.expect(response.ok).toBe(true)\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -865,7 +865,7 @@
       "id": "fetch-404-error",
       "name": "hopp.fetch() - 404 error handling",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
@@ -886,11 +886,11 @@
       "id": "fetch-custom-headers",
       "name": "hopp.fetch() - Custom headers",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
-      "testScript": "hopp.test('hopp.fetch() should send custom headers', async () => {\n  const response = await hopp.fetch('https://echo.hoppscotch.io', {\n    headers: {\n      'X-Custom-Header': 'test-value',\n      'X-Test-ID': '12345'\n    }\n  })\n  hopp.expect(response.status).toBe(200)\n  hopp.expect(response.headers).toBeType('object')\n})\n",
+      "testScript": "hopp.test('hopp.fetch() should send custom headers', async () => {\n  const response = await hopp.fetch('https://www.hongshu.com', {\n    headers: {\n      'X-Custom-Header': 'test-value',\n      'X-Test-ID': '12345'\n    }\n  })\n  hopp.expect(response.status).toBe(200)\n  hopp.expect(response.headers).toBeType('object')\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -907,11 +907,11 @@
       "id": "fetch-env-url",
       "name": "hopp.fetch() - Environment variable URL",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
-      "preRequestScript": "hopp.env.set('API_BASE_URL', 'https://echo.hoppscotch.io')\nhopp.env.set('API_PATH', '/status/200')\n",
-      "testScript": "hopp.test('hopp.fetch() should work with environment variable URLs', async () => {\n  const baseUrl = hopp.env.get('API_BASE_URL')\n  const path = hopp.env.get('API_PATH')\n  const fullUrl = baseUrl + path\n  \n  hopp.expect(fullUrl).toBe('https://echo.hoppscotch.io/status/200')\n  \n  const response = await hopp.fetch(fullUrl)\n  hopp.expect(response.status).toBe(200)\n})\n",
+      "preRequestScript": "hopp.env.set('API_BASE_URL', 'https://www.hongshu.com')\nhopp.env.set('API_PATH', '/status/200')\n",
+      "testScript": "hopp.test('hopp.fetch() should work with environment variable URLs', async () => {\n  const baseUrl = hopp.env.get('API_BASE_URL')\n  const path = hopp.env.get('API_PATH')\n  const fullUrl = baseUrl + path\n  \n  hopp.expect(fullUrl).toBe('https://www.hongshu.com/status/200')\n  \n  const response = await hopp.fetch(fullUrl)\n  hopp.expect(response.status).toBe(200)\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -928,11 +928,11 @@
       "id": "fetch-response-text",
       "name": "hopp.fetch() - Response text parsing",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io/status/200",
+      "endpoint": "https://www.hongshu.com/status/200",
       "params": [],
       "headers": [],
       "preRequestScript": "",
-      "testScript": "hopp.test('hopp.fetch() should parse response as text', async () => {\n  const response = await hopp.fetch('https://echo.hoppscotch.io/status/200')\n  const text = await response.text()\n  hopp.expect(text).toBeType('string')\n  hopp.expect(text.length > 0).toBe(true)\n})\n",
+      "testScript": "hopp.test('hopp.fetch() should parse response as text', async () => {\n  const response = await hopp.fetch('https://www.hongshu.com/status/200')\n  const text = await response.text()\n  hopp.expect(text).toBeType('string')\n  hopp.expect(text.length > 0).toBe(true)\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -949,11 +949,11 @@
       "id": "fetch-http-methods",
       "name": "hopp.fetch() - HTTP methods (PUT, DELETE, PATCH)",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
-      "testScript": "hopp.test('hopp.fetch() should support PUT method', async () => {\n  const response = await hopp.fetch('https://echo.hoppscotch.io/put', {\n    method: 'PUT',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ updated: true })\n  })\n  hopp.expect(response.status).toBe(200)\n})\n\nhopp.test('hopp.fetch() should support DELETE method', async () => {\n  const response = await hopp.fetch('https://echo.hoppscotch.io/delete', {\n    method: 'DELETE'\n  })\n  hopp.expect(response.status).toBe(200)\n})\n\nhopp.test('hopp.fetch() should support PATCH method', async () => {\n  const response = await hopp.fetch('https://echo.hoppscotch.io/patch', {\n    method: 'PATCH',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ patched: true })\n  })\n  hopp.expect(response.status).toBe(200)\n})\n",
+      "testScript": "hopp.test('hopp.fetch() should support PUT method', async () => {\n  const response = await hopp.fetch('https://www.hongshu.com/put', {\n    method: 'PUT',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ updated: true })\n  })\n  hopp.expect(response.status).toBe(200)\n})\n\nhopp.test('hopp.fetch() should support DELETE method', async () => {\n  const response = await hopp.fetch('https://www.hongshu.com/delete', {\n    method: 'DELETE'\n  })\n  hopp.expect(response.status).toBe(200)\n})\n\nhopp.test('hopp.fetch() should support PATCH method', async () => {\n  const response = await hopp.fetch('https://www.hongshu.com/patch', {\n    method: 'PATCH',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ patched: true })\n  })\n  hopp.expect(response.status).toBe(200)\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -970,11 +970,11 @@
       "id": "pm-sendrequest-string-url",
       "name": "pm.sendRequest() - String URL format",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
-      "testScript": "pm.test('pm.sendRequest() should work with string URL', () => {\n  pm.sendRequest('https://echo.hoppscotch.io/status/200', (error, response) => {\n    pm.expect(error).to.be.null\n    pm.expect(response.code).to.equal(200)\n    pm.expect(response.status).to.be.a('string')\n    pm.expect(Array.isArray(response.headers)).to.be.true\n  })\n})\n",
+      "testScript": "pm.test('pm.sendRequest() should work with string URL', () => {\n  pm.sendRequest('https://www.hongshu.com/status/200', (error, response) => {\n    pm.expect(error).to.be.null\n    pm.expect(response.code).to.equal(200)\n    pm.expect(response.status).to.be.a('string')\n    pm.expect(Array.isArray(response.headers)).to.be.true\n  })\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -991,11 +991,11 @@
       "id": "pm-sendrequest-request-object",
       "name": "pm.sendRequest() - Request object format",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
-      "testScript": "pm.test('pm.sendRequest() should work with request object', () => {\n  pm.sendRequest({\n    url: 'https://echo.hoppscotch.io/post',\n    method: 'POST',\n    header: [\n      { key: 'Content-Type', value: 'application/json' },\n      { key: 'X-Test-Header', value: 'test' }\n    ],\n    body: {\n      mode: 'raw',\n      raw: JSON.stringify({ name: 'test', value: 123 })\n    }\n  }, (error, response) => {\n    pm.expect(error).to.be.null\n    pm.expect(response.code).to.equal(200)\n    pm.expect(typeof response.body).to.equal('string')\n  })\n})\n",
+      "testScript": "pm.test('pm.sendRequest() should work with request object', () => {\n  pm.sendRequest({\n    url: 'https://www.hongshu.com/post',\n    method: 'POST',\n    header: [\n      { key: 'Content-Type', value: 'application/json' },\n      { key: 'X-Test-Header', value: 'test' }\n    ],\n    body: {\n      mode: 'raw',\n      raw: JSON.stringify({ name: 'test', value: 123 })\n    }\n  }, (error, response) => {\n    pm.expect(error).to.be.null\n    pm.expect(response.code).to.equal(200)\n    pm.expect(typeof response.body).to.equal('string')\n  })\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1012,11 +1012,11 @@
       "id": "pm-sendrequest-urlencoded",
       "name": "pm.sendRequest() - URL-encoded body",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
-      "testScript": "pm.test('pm.sendRequest() should handle URL-encoded body', () => {\n  pm.sendRequest({\n    url: 'https://echo.hoppscotch.io/post',\n    method: 'POST',\n    body: {\n      mode: 'urlencoded',\n      urlencoded: [\n        { key: 'username', value: 'testuser' },\n        { key: 'password', value: 'secret123' },\n        { key: 'remember', value: 'true' }\n      ]\n    }\n  }, (error, response) => {\n    pm.expect(error).to.be.null\n    pm.expect(response.code).to.equal(200)\n  })\n})\n",
+      "testScript": "pm.test('pm.sendRequest() should handle URL-encoded body', () => {\n  pm.sendRequest({\n    url: 'https://www.hongshu.com/post',\n    method: 'POST',\n    body: {\n      mode: 'urlencoded',\n      urlencoded: [\n        { key: 'username', value: 'testuser' },\n        { key: 'password', value: 'secret123' },\n        { key: 'remember', value: 'true' }\n      ]\n    }\n  }, (error, response) => {\n    pm.expect(error).to.be.null\n    pm.expect(response.code).to.equal(200)\n  })\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1033,11 +1033,11 @@
       "id": "pm-sendrequest-response-format",
       "name": "pm.sendRequest() - Response format validation",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
-      "testScript": "pm.test('pm.sendRequest() response should have Postman format', () => {\n  pm.sendRequest('https://echo.hoppscotch.io/status/200', (error, response) => {\n    pm.expect(error).to.be.null\n    \n    // Validate Postman response structure\n    pm.expect(response).to.have.property('code')\n    pm.expect(response).to.have.property('status')\n    pm.expect(response).to.have.property('headers')\n    pm.expect(response).to.have.property('body')\n    pm.expect(response).to.have.property('json')\n    \n    // Validate types\n    pm.expect(response.code).to.be.a('number')\n    pm.expect(response.status).to.be.a('string')\n    pm.expect(Array.isArray(response.headers)).to.be.true\n    pm.expect(typeof response.body).to.equal('string')\n    pm.expect(typeof response.json).to.equal('function')\n  })\n})\n",
+      "testScript": "pm.test('pm.sendRequest() response should have Postman format', () => {\n  pm.sendRequest('https://www.hongshu.com/status/200', (error, response) => {\n    pm.expect(error).to.be.null\n    \n    // Validate Postman response structure\n    pm.expect(response).to.have.property('code')\n    pm.expect(response).to.have.property('status')\n    pm.expect(response).to.have.property('headers')\n    pm.expect(response).to.have.property('body')\n    pm.expect(response).to.have.property('json')\n    \n    // Validate types\n    pm.expect(response.code).to.be.a('number')\n    pm.expect(response.status).to.be.a('string')\n    pm.expect(Array.isArray(response.headers)).to.be.true\n    pm.expect(typeof response.body).to.equal('string')\n    pm.expect(typeof response.json).to.equal('function')\n  })\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1054,7 +1054,7 @@
       "id": "pm-sendrequest-error-codes",
       "name": "pm.sendRequest() - HTTP error status codes",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
@@ -1076,10 +1076,10 @@
       "id": "pm-sendrequest-env-integration",
       "name": "pm.sendRequest() - Environment variable integration",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
-      "preRequestScript": "pm.environment.set('API_ENDPOINT', 'https://echo.hoppscotch.io')\npm.environment.set('AUTH_TOKEN', 'Bearer secret-token-123')\n",
+      "preRequestScript": "pm.environment.set('API_ENDPOINT', 'https://www.hongshu.com')\npm.environment.set('AUTH_TOKEN', 'Bearer secret-token-123')\n",
       "testScript": "pm.test('pm.sendRequest() should use environment variables', () => {\n  const apiEndpoint = pm.environment.get('API_ENDPOINT')\n  const authToken = pm.environment.get('AUTH_TOKEN')\n  \n  pm.sendRequest({\n    url: apiEndpoint + '/status/200',\n    method: 'GET',\n    header: [\n      { key: 'Authorization', value: authToken }\n    ]\n  }, (error, response) => {\n    pm.expect(error).to.be.null\n    pm.expect(response.code).to.equal(200)\n  })\n})\n",
       "auth": {
         "authType": "inherit",
@@ -1097,11 +1097,11 @@
       "id": "pm-sendrequest-store-response",
       "name": "pm.sendRequest() - Store response in environment",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
-      "testScript": "pm.test('pm.sendRequest() should store response data in environment', () => {\n  pm.sendRequest('https://echo.hoppscotch.io', (error, response) => {\n    pm.expect(error).to.be.null\n    \n    // Store response data\n    pm.environment.set('LAST_STATUS_CODE', response.code.toString())\n    pm.environment.set('LAST_STATUS_TEXT', response.status)\n    \n    // Verify storage\n    pm.expect(pm.environment.get('LAST_STATUS_CODE')).to.equal('200')\n    pm.expect(pm.environment.get('LAST_STATUS_TEXT')).to.be.a('string')\n  })\n})\n",
+      "testScript": "pm.test('pm.sendRequest() should store response data in environment', () => {\n  pm.sendRequest('https://www.hongshu.com', (error, response) => {\n    pm.expect(error).to.be.null\n    \n    // Store response data\n    pm.environment.set('LAST_STATUS_CODE', response.code.toString())\n    pm.environment.set('LAST_STATUS_TEXT', response.status)\n    \n    // Verify storage\n    pm.expect(pm.environment.get('LAST_STATUS_CODE')).to.equal('200')\n    pm.expect(pm.environment.get('LAST_STATUS_TEXT')).to.be.a('string')\n  })\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1118,11 +1118,11 @@
       "id": "pm-sendrequest-rfc-object-headers",
       "name": "pm.sendRequest() - RFC pattern with object headers",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "pm.environment.set('token', 'test-bearer-token-12345')\n",
-      "testScript": "pm.test('pm.sendRequest() should support RFC pattern with object headers', () => {\n  const requestObject = {\n    url: 'https://echo.hoppscotch.io/post',\n    method: 'POST',\n    header: {\n      'Content-Type': 'application/json',\n      'Authorization': 'Bearer ' + pm.environment.get('token')\n    },\n    body: {\n      mode: 'raw',\n      raw: JSON.stringify({ name: 'John Doe', action: 'create' })\n    }\n  }\n\n  pm.sendRequest(requestObject, (error, response) => {\n    pm.expect(error).to.be.null\n    pm.expect(response.code).to.equal(200)\n    pm.expect(response.body).to.be.a('string')\n    \n    // Parse and validate response\n    const jsonResponse = response.json()\n    pm.expect(jsonResponse).to.be.an('object')\n    pm.expect(jsonResponse.data).to.be.a('string')\n    \n    // Store user ID from response\n    pm.environment.set('userId', 'user_' + response.code)\n  })\n})\n",
+      "testScript": "pm.test('pm.sendRequest() should support RFC pattern with object headers', () => {\n  const requestObject = {\n    url: 'https://www.hongshu.com/post',\n    method: 'POST',\n    header: {\n      'Content-Type': 'application/json',\n      'Authorization': 'Bearer ' + pm.environment.get('token')\n    },\n    body: {\n      mode: 'raw',\n      raw: JSON.stringify({ name: 'John Doe', action: 'create' })\n    }\n  }\n\n  pm.sendRequest(requestObject, (error, response) => {\n    pm.expect(error).to.be.null\n    pm.expect(response.code).to.equal(200)\n    pm.expect(response.body).to.be.a('string')\n    \n    // Parse and validate response\n    const jsonResponse = response.json()\n    pm.expect(jsonResponse).to.be.an('object')\n    pm.expect(jsonResponse.data).to.be.a('string')\n    \n    // Store user ID from response\n    pm.environment.set('userId', 'user_' + response.code)\n  })\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1139,11 +1139,11 @@
       "id": "fetch-pm-interop",
       "name": "hopp.fetch() and pm.sendRequest() - Interoperability",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
-      "testScript": "// Test that both hopp.fetch() and pm.sendRequest() work\nhopp.test('hopp.fetch() should work and store results', async () => {\n  const fetchResponse = await hopp.fetch('https://echo.hoppscotch.io/status/200')\n  hopp.expect(fetchResponse.status).toBe(200)\n  \n  // Store in environment\n  hopp.env.set('FETCH_STATUS', fetchResponse.status.toString())\n  \n  // Verify it was stored\n  const storedStatus = hopp.env.get('FETCH_STATUS')\n  hopp.expect(storedStatus).toBe('200')\n})\n",
+      "testScript": "// Test that both hopp.fetch() and pm.sendRequest() work\nhopp.test('hopp.fetch() should work and store results', async () => {\n  const fetchResponse = await hopp.fetch('https://www.hongshu.com/status/200')\n  hopp.expect(fetchResponse.status).toBe(200)\n  \n  // Store in environment\n  hopp.env.set('FETCH_STATUS', fetchResponse.status.toString())\n  \n  // Verify it was stored\n  const storedStatus = hopp.env.get('FETCH_STATUS')\n  hopp.expect(storedStatus).toBe('200')\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1160,7 +1160,7 @@
       "id": "fetch-json-parsing",
       "name": "hopp.fetch() - JSON response parsing",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io/status/200",
+      "endpoint": "https://www.hongshu.com/status/200",
       "params": [],
       "headers": [
         {
@@ -1171,7 +1171,7 @@
         }
       ],
       "preRequestScript": "",
-      "testScript": "hopp.test('hopp.fetch() should parse JSON response', async () => {\n  const response = await hopp.fetch('https://echo.hoppscotch.io/status/200', {\n    headers: { 'Accept': 'application/json' }\n  })\n\n  hopp.expect(response.status).toBe(200)\n\n  const json = await response.json()\n  hopp.expect(typeof json).toBe('object')\n})\n",
+      "testScript": "hopp.test('hopp.fetch() should parse JSON response', async () => {\n  const response = await hopp.fetch('https://www.hongshu.com/status/200', {\n    headers: { 'Accept': 'application/json' }\n  })\n\n  hopp.expect(response.status).toBe(200)\n\n  const json = await response.json()\n  hopp.expect(typeof json).toBe('object')\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1188,7 +1188,7 @@
       "id": "fetch-headers-access",
       "name": "hopp.fetch() - Response headers access",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io/headers",
+      "endpoint": "https://www.hongshu.com/headers",
       "params": [],
       "headers": [
         {
@@ -1199,7 +1199,7 @@
         }
       ],
       "preRequestScript": "",
-      "testScript": "hopp.test('hopp.fetch() should access response headers', async () => {\n  const response = await hopp.fetch('https://echo.hoppscotch.io/headers', {\n    headers: { 'X-Custom-Test': 'test-value' }\n  })\n\n  hopp.expect(response.status).toBe(200)\n  hopp.expect(response.headers).toBeType('object')\n\n  const contentType = response.headers.get('content-type')\n  if (contentType) {\n    hopp.expect(typeof contentType).toBe('string')\n  }\n})\n",
+      "testScript": "hopp.test('hopp.fetch() should access response headers', async () => {\n  const response = await hopp.fetch('https://www.hongshu.com/headers', {\n    headers: { 'X-Custom-Test': 'test-value' }\n  })\n\n  hopp.expect(response.status).toBe(200)\n  hopp.expect(response.headers).toBeType('object')\n\n  const contentType = response.headers.get('content-type')\n  if (contentType) {\n    hopp.expect(typeof contentType).toBe('string')\n  }\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1216,11 +1216,11 @@
       "id": "pm-sendrequest-formdata",
       "name": "pm.sendRequest() - FormData body mode",
       "method": "POST",
-      "endpoint": "https://echo.hoppscotch.io/post",
+      "endpoint": "https://www.hongshu.com/post",
       "params": [],
       "headers": [],
       "preRequestScript": "",
-      "testScript": "pm.test('pm.sendRequest() should handle FormData body', () => {\n  pm.sendRequest({\n    url: 'https://echo.hoppscotch.io/post',\n    method: 'POST',\n    body: {\n      mode: 'formdata',\n      formdata: [\n        { key: 'field1', value: 'value1' },\n        { key: 'field2', value: 'value2' },\n        { key: 'username', value: 'testuser' }\n      ]\n    }\n  }, (error, response) => {\n    pm.expect(error).to.be.null\n    pm.expect(response.code).to.equal(200)\n    pm.expect(typeof response.body).to.equal('string')\n  })\n})\n",
+      "testScript": "pm.test('pm.sendRequest() should handle FormData body', () => {\n  pm.sendRequest({\n    url: 'https://www.hongshu.com/post',\n    method: 'POST',\n    body: {\n      mode: 'formdata',\n      formdata: [\n        { key: 'field1', value: 'value1' },\n        { key: 'field2', value: 'value2' },\n        { key: 'username', value: 'testuser' }\n      ]\n    }\n  }, (error, response) => {\n    pm.expect(error).to.be.null\n    pm.expect(response.code).to.equal(200)\n    pm.expect(typeof response.body).to.equal('string')\n  })\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1237,11 +1237,11 @@
       "id": "pm-sendrequest-json-parsing",
       "name": "pm.sendRequest() - JSON parsing method",
       "method": "POST",
-      "endpoint": "https://echo.hoppscotch.io/post",
+      "endpoint": "https://www.hongshu.com/post",
       "params": [],
       "headers": [],
       "preRequestScript": "",
-      "testScript": "pm.test('pm.sendRequest() response.json() should parse JSON', () => {\n  pm.sendRequest({\n    url: 'https://echo.hoppscotch.io/post',\n    method: 'POST',\n    header: [\n      { key: 'Content-Type', value: 'application/json' }\n    ],\n    body: {\n      mode: 'raw',\n      raw: JSON.stringify({ test: 'data', number: 42 })\n    }\n  }, (error, response) => {\n    pm.expect(error).to.be.null\n    pm.expect(response.code).to.equal(200)\n\n    const data = response.json()\n    pm.expect(data).to.be.an('object')\n    pm.expect(data).to.not.be.null\n  })\n})\n",
+      "testScript": "pm.test('pm.sendRequest() response.json() should parse JSON', () => {\n  pm.sendRequest({\n    url: 'https://www.hongshu.com/post',\n    method: 'POST',\n    header: [\n      { key: 'Content-Type', value: 'application/json' }\n    ],\n    body: {\n      mode: 'raw',\n      raw: JSON.stringify({ test: 'data', number: 42 })\n    }\n  }, (error, response) => {\n    pm.expect(error).to.be.null\n    pm.expect(response.code).to.equal(200)\n\n    const data = response.json()\n    pm.expect(data).to.be.an('object')\n    pm.expect(data).to.not.be.null\n  })\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1258,7 +1258,7 @@
       "id": "pm-sendrequest-headers-extraction",
       "name": "pm.sendRequest() - Response headers extraction",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io/headers",
+      "endpoint": "https://www.hongshu.com/headers",
       "params": [],
       "headers": [
         {
@@ -1269,7 +1269,7 @@
         }
       ],
       "preRequestScript": "",
-      "testScript": "pm.test('pm.sendRequest() should extract specific headers', () => {\n  pm.sendRequest({\n    url: 'https://echo.hoppscotch.io/headers',\n    header: [\n      { key: 'X-Test-Header', value: 'test-123' }\n    ]\n  }, (error, response) => {\n    pm.expect(error).to.be.null\n    pm.expect(response.code).to.equal(200)\n    pm.expect(Array.isArray(response.headers)).to.be.true\n\n    const contentType = response.headers.find(h =>\n      h.key.toLowerCase() === 'content-type'\n    )\n    pm.expect(contentType).to.exist\n    pm.expect(contentType.value).to.be.a('string')\n  })\n})\n",
+      "testScript": "pm.test('pm.sendRequest() should extract specific headers', () => {\n  pm.sendRequest({\n    url: 'https://www.hongshu.com/headers',\n    header: [\n      { key: 'X-Test-Header', value: 'test-123' }\n    ]\n  }, (error, response) => {\n    pm.expect(error).to.be.null\n    pm.expect(response.code).to.equal(200)\n    pm.expect(Array.isArray(response.headers)).to.be.true\n\n    const contentType = response.headers.find(h =>\n      h.key.toLowerCase() === 'content-type'\n    )\n    pm.expect(contentType).to.exist\n    pm.expect(contentType.value).to.be.a('string')\n  })\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1286,7 +1286,7 @@
       "id": "fetch-network-error",
       "name": "hopp.fetch() - Network error handling",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io/status/200",
+      "endpoint": "https://www.hongshu.com/status/200",
       "params": [],
       "headers": [],
       "preRequestScript": "",
@@ -1307,7 +1307,7 @@
       "id": "pm-sendrequest-network-error",
       "name": "pm.sendRequest() - Network error callback",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io/status/200",
+      "endpoint": "https://www.hongshu.com/status/200",
       "params": [],
       "headers": [],
       "preRequestScript": "",
@@ -1328,11 +1328,11 @@
       "id": "fetch-sequential-requests",
       "name": "hopp.fetch() - Sequential requests chain",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io/status/200",
+      "endpoint": "https://www.hongshu.com/status/200",
       "params": [],
       "headers": [],
       "preRequestScript": "",
-      "testScript": "hopp.test('hopp.fetch() should chain multiple requests', async () => {\n  const response1 = await hopp.fetch('https://echo.hoppscotch.io/status/200')\n  hopp.expect(response1.status).toBe(200)\n\n  hopp.env.set('CHAIN_STATUS', response1.status.toString())\n\n  const firstStatus = hopp.env.get('CHAIN_STATUS')\n  const response2 = await hopp.fetch(`https://echo.hoppscotch.io/status/${firstStatus}`, {\n    headers: { 'X-Chain-Step': '2' }\n  })\n  hopp.expect(response2.status).toBe(200)\n\n  const response3 = await hopp.fetch('https://echo.hoppscotch.io/headers', {\n    headers: { 'X-Chain-Step': '3', 'X-Previous-Status': firstStatus }\n  })\n  hopp.expect(response3.status).toBe(200)\n})\n",
+      "testScript": "hopp.test('hopp.fetch() should chain multiple requests', async () => {\n  const response1 = await hopp.fetch('https://www.hongshu.com/status/200')\n  hopp.expect(response1.status).toBe(200)\n\n  hopp.env.set('CHAIN_STATUS', response1.status.toString())\n\n  const firstStatus = hopp.env.get('CHAIN_STATUS')\n  const response2 = await hopp.fetch(`https://www.hongshu.com/status/${firstStatus}`, {\n    headers: { 'X-Chain-Step': '2' }\n  })\n  hopp.expect(response2.status).toBe(200)\n\n  const response3 = await hopp.fetch('https://www.hongshu.com/headers', {\n    headers: { 'X-Chain-Step': '3', 'X-Previous-Status': firstStatus }\n  })\n  hopp.expect(response3.status).toBe(200)\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1349,11 +1349,11 @@
       "id": "pm-sendrequest-nested",
       "name": "pm.sendRequest() - Nested requests",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io/status/200",
+      "endpoint": "https://www.hongshu.com/status/200",
       "params": [],
       "headers": [],
       "preRequestScript": "",
-      "testScript": "pm.test('pm.sendRequest() should support nested requests', () => {\n  pm.sendRequest('https://echo.hoppscotch.io/status/200', (error1, response1) => {\n    pm.expect(error1).to.be.null\n    pm.expect(response1.code).to.equal(200)\n\n    pm.environment.set('NESTED_STATUS', response1.code.toString())\n\n    pm.sendRequest({\n      url: 'https://echo.hoppscotch.io/headers',\n      header: [\n        { key: 'X-Parent-Status', value: pm.environment.get('NESTED_STATUS') }\n      ]\n    }, (error2, response2) => {\n      pm.expect(error2).to.be.null\n      pm.expect(response2.code).to.equal(200)\n    })\n  })\n})\n",
+      "testScript": "pm.test('pm.sendRequest() should support nested requests', () => {\n  pm.sendRequest('https://www.hongshu.com/status/200', (error1, response1) => {\n    pm.expect(error1).to.be.null\n    pm.expect(response1.code).to.equal(200)\n\n    pm.environment.set('NESTED_STATUS', response1.code.toString())\n\n    pm.sendRequest({\n      url: 'https://www.hongshu.com/headers',\n      header: [\n        { key: 'X-Parent-Status', value: pm.environment.get('NESTED_STATUS') }\n      ]\n    }, (error2, response2) => {\n      pm.expect(error2).to.be.null\n      pm.expect(response2.code).to.equal(200)\n    })\n  })\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1370,11 +1370,11 @@
       "id": "fetch-binary-response",
       "name": "hopp.fetch() - Binary response (arrayBuffer)",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io/bytes/100",
+      "endpoint": "https://www.hongshu.com/bytes/100",
       "params": [],
       "headers": [],
       "preRequestScript": "",
-      "testScript": "hopp.test('hopp.fetch() should handle binary responses', async () => {\n  const response = await hopp.fetch('https://echo.hoppscotch.io/bytes/100')\n  hopp.expect(response.status).toBe(200)\n\n  const buffer = await response.arrayBuffer()\n  hopp.expect(typeof buffer).toBe('object')\n  const size = (buffer && typeof buffer.byteLength === 'number') ? buffer.byteLength : Object.keys(buffer || {}).length\n  hopp.expect(size > 0).toBe(true)\n})\n",
+      "testScript": "hopp.test('hopp.fetch() should handle binary responses', async () => {\n  const response = await hopp.fetch('https://www.hongshu.com/bytes/100')\n  hopp.expect(response.status).toBe(200)\n\n  const buffer = await response.arrayBuffer()\n  hopp.expect(typeof buffer).toBe('object')\n  const size = (buffer && typeof buffer.byteLength === 'number') ? buffer.byteLength : Object.keys(buffer || {}).length\n  hopp.expect(size > 0).toBe(true)\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1391,11 +1391,11 @@
       "id": "pm-sendrequest-empty-response",
       "name": "pm.sendRequest() - Empty response body (204)",
       "method": "DELETE",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "",
-      "testScript": "pm.test('pm.sendRequest() should handle responses correctly', () => {\n  pm.sendRequest({\n    url: 'https://echo.hoppscotch.io',\n    method: 'GET'\n  }, (error, response) => {\n    pm.expect(error).to.be.null\n    pm.expect(response.code).to.satisfy(code => code >= 200 && code < 300)\n    pm.expect(response.body).to.be.a('string')\n\n    const jsonResult = response.json()\n    pm.expect(jsonResult === null || typeof jsonResult === 'object').to.be.true\n  })\n})\n",
+      "testScript": "pm.test('pm.sendRequest() should handle responses correctly', () => {\n  pm.sendRequest({\n    url: 'https://www.hongshu.com',\n    method: 'GET'\n  }, (error, response) => {\n    pm.expect(error).to.be.null\n    pm.expect(response.code).to.satisfy(code => code >= 200 && code < 300)\n    pm.expect(response.body).to.be.a('string')\n\n    const jsonResult = response.json()\n    pm.expect(jsonResult === null || typeof jsonResult === 'object').to.be.true\n  })\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1412,10 +1412,10 @@
       "id": "async_patterns_prereq",
       "name": "Async Patterns - Pre-Request",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
-      "preRequestScript": "// Test 1: Top-level await (most common pattern)\nconst response1 = await hopp.fetch('https://echo.hoppscotch.io?test=toplevel-await')\nconst data1 = await response1.json()\nhopp.env.active.set('async_toplevel_status', response1.status.toString())\nhopp.env.active.set('async_toplevel_arg', data1.args.test)\n\n// Test 2: .then() chaining pattern\nhopp.fetch('https://echo.hoppscotch.io?test=then-chain')\n  .then(response => {\n    hopp.env.active.set('async_then_status', response.status.toString())\n    return response.json()\n  })\n  .then(data => {\n    hopp.env.active.set('async_then_arg', data.args.test)\n  })\n\n// Test 3: Mixed pattern - await with .then()\nawait hopp.fetch('https://echo.hoppscotch.io?test=mixed')\n  .then(async response => {\n    hopp.env.active.set('async_mixed_status', response.status.toString())\n    const data = await response.json()\n    hopp.env.active.set('async_mixed_arg', data.args.test)\n  })\n\n// Test 4: Promise.all with await\nconst [r1, r2] = await Promise.all([\n  hopp.fetch('https://echo.hoppscotch.io?test=parallel1'),\n  hopp.fetch('https://echo.hoppscotch.io?test=parallel2')\n])\nconst [d1, d2] = await Promise.all([r1.json(), r2.json()])\nhopp.env.active.set('async_parallel1', d1.args.test)\nhopp.env.active.set('async_parallel2', d2.args.test)\n",
+      "preRequestScript": "// Test 1: Top-level await (most common pattern)\nconst response1 = await hopp.fetch('https://www.hongshu.com?test=toplevel-await')\nconst data1 = await response1.json()\nhopp.env.active.set('async_toplevel_status', response1.status.toString())\nhopp.env.active.set('async_toplevel_arg', data1.args.test)\n\n// Test 2: .then() chaining pattern\nhopp.fetch('https://www.hongshu.com?test=then-chain')\n  .then(response => {\n    hopp.env.active.set('async_then_status', response.status.toString())\n    return response.json()\n  })\n  .then(data => {\n    hopp.env.active.set('async_then_arg', data.args.test)\n  })\n\n// Test 3: Mixed pattern - await with .then()\nawait hopp.fetch('https://www.hongshu.com?test=mixed')\n  .then(async response => {\n    hopp.env.active.set('async_mixed_status', response.status.toString())\n    const data = await response.json()\n    hopp.env.active.set('async_mixed_arg', data.args.test)\n  })\n\n// Test 4: Promise.all with await\nconst [r1, r2] = await Promise.all([\n  hopp.fetch('https://www.hongshu.com?test=parallel1'),\n  hopp.fetch('https://www.hongshu.com?test=parallel2')\n])\nconst [d1, d2] = await Promise.all([r1.json(), r2.json()])\nhopp.env.active.set('async_parallel1', d1.args.test)\nhopp.env.active.set('async_parallel2', d2.args.test)\n",
       "testScript": "hopp.test('Pre-request top-level await works', () => {\n  hopp.expect(hopp.env.active.get('async_toplevel_status')).toBe('200')\n  hopp.expect(hopp.env.active.get('async_toplevel_arg')).toBe('toplevel-await')\n})\n\nhopp.test('Pre-request .then() chain works', () => {\n  hopp.expect(hopp.env.active.get('async_then_status')).toBe('200')\n  hopp.expect(hopp.env.active.get('async_then_arg')).toBe('then-chain')\n})\n\nhopp.test('Pre-request mixed await/.then() works', () => {\n  hopp.expect(hopp.env.active.get('async_mixed_status')).toBe('200')\n  hopp.expect(hopp.env.active.get('async_mixed_arg')).toBe('mixed')\n})\n\nhopp.test('Pre-request Promise.all works', () => {\n  hopp.expect(hopp.env.active.get('async_parallel1')).toBe('parallel1')\n  hopp.expect(hopp.env.active.get('async_parallel2')).toBe('parallel2')\n})\n",
       "auth": {
         "authType": "inherit",
@@ -1433,11 +1433,11 @@
       "id": "async_patterns_test",
       "name": "Async Patterns - Test Script",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
       "preRequestScript": "// Empty pre-request - all tests in test script\n",
-      "testScript": "// Test 1: Top-level await in test script\nconst response1 = await hopp.fetch('https://echo.hoppscotch.io?test=test-toplevel')\nconst data1 = await response1.json()\n\nhopp.test('Test script top-level await works', () => {\n  hopp.expect(response1.status).toBe(200)\n  hopp.expect(data1.args.test).toBe('test-toplevel')\n})\n\n// Test 2: await inside hopp.test callback\nhopp.test('Await inside test callback works', async () => {\n  const response = await hopp.fetch('https://echo.hoppscotch.io?test=inside-callback')\n  hopp.expect(response.status).toBe(200)\n  const data = await response.json()\n  hopp.expect(data.args.test).toBe('inside-callback')\n})\n\n// Test 3: .then() inside test callback\nhopp.test('.then() inside test callback works', () => {\n  return hopp.fetch('https://echo.hoppscotch.io?test=then-callback')\n    .then(response => {\n      hopp.expect(response.status).toBe(200)\n      return response.json()\n    })\n    .then(data => {\n      hopp.expect(data.args.test).toBe('then-callback')\n    })\n})\n\n// Test 4: Mixed pattern in test\nhopp.test('Mixed pattern in test works', async () => {\n  await hopp.fetch('https://echo.hoppscotch.io?test=mixed-test')\n    .then(response => response.json())\n    .then(data => {\n      hopp.expect(data.args.test).toBe('mixed-test')\n    })\n})\n\n// Test 5: Promise.all in test callback\nhopp.test('Promise.all in test callback works', async () => {\n  const responses = await Promise.all([\n    hopp.fetch('https://echo.hoppscotch.io?id=1'),\n    hopp.fetch('https://echo.hoppscotch.io?id=2')\n  ])\n  hopp.expect(responses[0].status).toBe(200)\n  hopp.expect(responses[1].status).toBe(200)\n  const dataArray = await Promise.all(responses.map(r => r.json()))\n  hopp.expect(dataArray[0].args.id).toBe('1')\n  hopp.expect(dataArray[1].args.id).toBe('2')\n})\n",
+      "testScript": "// Test 1: Top-level await in test script\nconst response1 = await hopp.fetch('https://www.hongshu.com?test=test-toplevel')\nconst data1 = await response1.json()\n\nhopp.test('Test script top-level await works', () => {\n  hopp.expect(response1.status).toBe(200)\n  hopp.expect(data1.args.test).toBe('test-toplevel')\n})\n\n// Test 2: await inside hopp.test callback\nhopp.test('Await inside test callback works', async () => {\n  const response = await hopp.fetch('https://www.hongshu.com?test=inside-callback')\n  hopp.expect(response.status).toBe(200)\n  const data = await response.json()\n  hopp.expect(data.args.test).toBe('inside-callback')\n})\n\n// Test 3: .then() inside test callback\nhopp.test('.then() inside test callback works', () => {\n  return hopp.fetch('https://www.hongshu.com?test=then-callback')\n    .then(response => {\n      hopp.expect(response.status).toBe(200)\n      return response.json()\n    })\n    .then(data => {\n      hopp.expect(data.args.test).toBe('then-callback')\n    })\n})\n\n// Test 4: Mixed pattern in test\nhopp.test('Mixed pattern in test works', async () => {\n  await hopp.fetch('https://www.hongshu.com?test=mixed-test')\n    .then(response => response.json())\n    .then(data => {\n      hopp.expect(data.args.test).toBe('mixed-test')\n    })\n})\n\n// Test 5: Promise.all in test callback\nhopp.test('Promise.all in test callback works', async () => {\n  const responses = await Promise.all([\n    hopp.fetch('https://www.hongshu.com?id=1'),\n    hopp.fetch('https://www.hongshu.com?id=2')\n  ])\n  hopp.expect(responses[0].status).toBe(200)\n  hopp.expect(responses[1].status).toBe(200)\n  const dataArray = await Promise.all(responses.map(r => r.json()))\n  hopp.expect(dataArray[0].args.id).toBe('1')\n  hopp.expect(dataArray[1].args.id).toBe('2')\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1454,11 +1454,11 @@
       "id": "workflow_patterns",
       "name": "Workflow Patterns (Sequential, Parallel, Auth)",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
-      "preRequestScript": "// Test 1: Sequential requests with .then chaining\nhopp.fetch('https://echo.hoppscotch.io?step=1')\n  .then(r => r.json())\n  .then(d1 => {\n    hopp.env.active.set('seq_step1', d1.args.step)\n    return hopp.fetch(`https://echo.hoppscotch.io?step=2&prev=${d1.args.step}`)\n  })\n  .then(r => r.json())\n  .then(d2 => {\n    hopp.env.active.set('seq_step2', d2.args.step)\n    hopp.env.active.set('seq_prev', d2.args.prev)\n  })\n\n// Test 2: Parallel with Promise.all and mixed patterns\nconst parallelPromises = [\n  hopp.fetch('https://echo.hoppscotch.io?id=1').then(r => r.json()),\n  hopp.fetch('https://echo.hoppscotch.io?id=2').then(r => r.json()),\n  hopp.fetch('https://echo.hoppscotch.io?id=3').then(r => r.json())\n]\n\nawait Promise.all(parallelPromises).then(results => {\n  hopp.env.active.set('parallel_id1', results[0].args.id)\n  hopp.env.active.set('parallel_id2', results[1].args.id)\n  hopp.env.active.set('parallel_id3', results[2].args.id)\n})\n\n// Test 3: Auth workflow\nconst authResp = await hopp.fetch('https://echo.hoppscotch.io?action=login&user=testuser')\nconst authData = await authResp.json()\nconst token = `${authData.args.action}_token_${authData.args.user}`\nhopp.env.active.set('workflow_token', token)\n\nconst dataResp = await hopp.fetch('https://echo.hoppscotch.io?action=fetch', {\n  headers: { 'Authorization': `Bearer ${token}` }\n})\nconst data = await dataResp.json()\nhopp.env.active.set('workflow_auth_header', data.headers['authorization'])\n",
-      "testScript": "hopp.test('Sequential requests work', () => {\n  hopp.expect(hopp.env.active.get('seq_step1')).toBe('1')\n  hopp.expect(hopp.env.active.get('seq_step2')).toBe('2')\n  hopp.expect(hopp.env.active.get('seq_prev')).toBe('1')\n})\n\nhopp.test('Parallel requests work', () => {\n  hopp.expect(hopp.env.active.get('parallel_id1')).toBe('1')\n  hopp.expect(hopp.env.active.get('parallel_id2')).toBe('2')\n  hopp.expect(hopp.env.active.get('parallel_id3')).toBe('3')\n})\n\nhopp.test('Auth workflow works', () => {\n  const token = hopp.env.active.get('workflow_token')\n  hopp.expect(token).toInclude('login_token_testuser')\n  hopp.expect(hopp.env.active.get('workflow_auth_header')).toBe(`Bearer ${token}`)\n})\n\n// Test 4: Complex workflow in test with mixed async\nhopp.test('Complex workflow in test works', async () => {\n  // First request with await\n  const r1 = await hopp.fetch('https://echo.hoppscotch.io?workflow=start')\n  const d1 = await r1.json()\n  const workflowId = d1.args.workflow\n  \n  // Second request with .then chaining\n  await hopp.fetch(`https://echo.hoppscotch.io?workflow=${workflowId}&step=2`)\n    .then(r => r.json())\n    .then(d => {\n      hopp.expect(d.args.workflow).toBe('start')\n      hopp.expect(d.args.step).toBe('2')\n    })\n})\n",
+      "preRequestScript": "// Test 1: Sequential requests with .then chaining\nhopp.fetch('https://www.hongshu.com?step=1')\n  .then(r => r.json())\n  .then(d1 => {\n    hopp.env.active.set('seq_step1', d1.args.step)\n    return hopp.fetch(`https://www.hongshu.com?step=2&prev=${d1.args.step}`)\n  })\n  .then(r => r.json())\n  .then(d2 => {\n    hopp.env.active.set('seq_step2', d2.args.step)\n    hopp.env.active.set('seq_prev', d2.args.prev)\n  })\n\n// Test 2: Parallel with Promise.all and mixed patterns\nconst parallelPromises = [\n  hopp.fetch('https://www.hongshu.com?id=1').then(r => r.json()),\n  hopp.fetch('https://www.hongshu.com?id=2').then(r => r.json()),\n  hopp.fetch('https://www.hongshu.com?id=3').then(r => r.json())\n]\n\nawait Promise.all(parallelPromises).then(results => {\n  hopp.env.active.set('parallel_id1', results[0].args.id)\n  hopp.env.active.set('parallel_id2', results[1].args.id)\n  hopp.env.active.set('parallel_id3', results[2].args.id)\n})\n\n// Test 3: Auth workflow\nconst authResp = await hopp.fetch('https://www.hongshu.com?action=login&user=testuser')\nconst authData = await authResp.json()\nconst token = `${authData.args.action}_token_${authData.args.user}`\nhopp.env.active.set('workflow_token', token)\n\nconst dataResp = await hopp.fetch('https://www.hongshu.com?action=fetch', {\n  headers: { 'Authorization': `Bearer ${token}` }\n})\nconst data = await dataResp.json()\nhopp.env.active.set('workflow_auth_header', data.headers['authorization'])\n",
+      "testScript": "hopp.test('Sequential requests work', () => {\n  hopp.expect(hopp.env.active.get('seq_step1')).toBe('1')\n  hopp.expect(hopp.env.active.get('seq_step2')).toBe('2')\n  hopp.expect(hopp.env.active.get('seq_prev')).toBe('1')\n})\n\nhopp.test('Parallel requests work', () => {\n  hopp.expect(hopp.env.active.get('parallel_id1')).toBe('1')\n  hopp.expect(hopp.env.active.get('parallel_id2')).toBe('2')\n  hopp.expect(hopp.env.active.get('parallel_id3')).toBe('3')\n})\n\nhopp.test('Auth workflow works', () => {\n  const token = hopp.env.active.get('workflow_token')\n  hopp.expect(token).toInclude('login_token_testuser')\n  hopp.expect(hopp.env.active.get('workflow_auth_header')).toBe(`Bearer ${token}`)\n})\n\n// Test 4: Complex workflow in test with mixed async\nhopp.test('Complex workflow in test works', async () => {\n  // First request with await\n  const r1 = await hopp.fetch('https://www.hongshu.com?workflow=start')\n  const d1 = await r1.json()\n  const workflowId = d1.args.workflow\n  \n  // Second request with .then chaining\n  await hopp.fetch(`https://www.hongshu.com?workflow=${workflowId}&step=2`)\n    .then(r => r.json())\n    .then(d => {\n      hopp.expect(d.args.workflow).toBe('start')\n      hopp.expect(d.args.step).toBe('2')\n    })\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1475,11 +1475,11 @@
       "id": "error_handling_combined",
       "name": "Error Handling & Edge Cases",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
-      "preRequestScript": "// Test 1: Error handling with try/catch\nlet errorOccurred = false\ntry {\n  const response = await hopp.fetch('https://echo.hoppscotch.io')\n  if (!response.ok) {\n    errorOccurred = true\n  }\n  hopp.env.active.set('fetch_success', 'true')\n} catch (error) {\n  errorOccurred = true\n  hopp.env.active.set('fetch_success', 'false')\n}\nhopp.env.active.set('error_occurred', errorOccurred.toString())\n\n// Test 2: Bearer token auth\nconst token = 'sample_bearer_token_abc123'\nconst authResp = await hopp.fetch('https://echo.hoppscotch.io', {\n  headers: { 'Authorization': `Bearer ${token}` }\n})\nconst authData = await authResp.json()\nhopp.env.active.set('sent_auth_header', authData.headers['authorization'] || 'missing')\n\n// Test 3: Content negotiation headers\nconst contentResp = await hopp.fetch('https://echo.hoppscotch.io', {\n  headers: {\n    'Accept': 'application/json, text/plain, */*',\n    'Accept-Language': 'en-US,en;q=0.9',\n    'Accept-Encoding': 'gzip, deflate, br'\n  }\n})\nconst contentData = await contentResp.json()\nhopp.env.active.set('accept_header', contentData.headers['accept'] || 'missing')\n",
-      "testScript": "hopp.test('Error handling works', () => {\n  hopp.expect(hopp.env.active.get('fetch_success')).toBe('true')\n  hopp.expect(hopp.env.active.get('error_occurred')).toBe('false')\n})\n\nhopp.test('Bearer token auth works', () => {\n  const token = 'sample_bearer_token_abc123'\n  hopp.expect(hopp.env.active.get('sent_auth_header')).toBe(`Bearer ${token}`)\n})\n\nhopp.test('Content negotiation works', () => {\n  hopp.expect(hopp.env.active.get('accept_header')).toInclude('application/json')\n})\n\n// Test error handling in test script with .then().catch()\nhopp.test('Error handling with .catch() works', () => {\n  return hopp.fetch('https://echo.hoppscotch.io')\n    .then(r => {\n      hopp.expect(r.ok).toBe(true)\n      return r.json()\n    })\n    .then(d => {\n      hopp.expect(d.method).toBe('GET')\n    })\n    .catch(error => {\n      hopp.expect(true).toBe(false) // Should not reach here\n    })\n})\n",
+      "preRequestScript": "// Test 1: Error handling with try/catch\nlet errorOccurred = false\ntry {\n  const response = await hopp.fetch('https://www.hongshu.com')\n  if (!response.ok) {\n    errorOccurred = true\n  }\n  hopp.env.active.set('fetch_success', 'true')\n} catch (error) {\n  errorOccurred = true\n  hopp.env.active.set('fetch_success', 'false')\n}\nhopp.env.active.set('error_occurred', errorOccurred.toString())\n\n// Test 2: Bearer token auth\nconst token = 'sample_bearer_token_abc123'\nconst authResp = await hopp.fetch('https://www.hongshu.com', {\n  headers: { 'Authorization': `Bearer ${token}` }\n})\nconst authData = await authResp.json()\nhopp.env.active.set('sent_auth_header', authData.headers['authorization'] || 'missing')\n\n// Test 3: Content negotiation headers\nconst contentResp = await hopp.fetch('https://www.hongshu.com', {\n  headers: {\n    'Accept': 'application/json, text/plain, */*',\n    'Accept-Language': 'en-US,en;q=0.9',\n    'Accept-Encoding': 'gzip, deflate, br'\n  }\n})\nconst contentData = await contentResp.json()\nhopp.env.active.set('accept_header', contentData.headers['accept'] || 'missing')\n",
+      "testScript": "hopp.test('Error handling works', () => {\n  hopp.expect(hopp.env.active.get('fetch_success')).toBe('true')\n  hopp.expect(hopp.env.active.get('error_occurred')).toBe('false')\n})\n\nhopp.test('Bearer token auth works', () => {\n  const token = 'sample_bearer_token_abc123'\n  hopp.expect(hopp.env.active.get('sent_auth_header')).toBe(`Bearer ${token}`)\n})\n\nhopp.test('Content negotiation works', () => {\n  hopp.expect(hopp.env.active.get('accept_header')).toInclude('application/json')\n})\n\n// Test error handling in test script with .then().catch()\nhopp.test('Error handling with .catch() works', () => {\n  return hopp.fetch('https://www.hongshu.com')\n    .then(r => {\n      hopp.expect(r.ok).toBe(true)\n      return r.json()\n    })\n    .then(d => {\n      hopp.expect(d.method).toBe('GET')\n    })\n    .catch(error => {\n      hopp.expect(true).toBe(false) // Should not reach here\n    })\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1496,11 +1496,11 @@
       "id": "large_payload_formdata",
       "name": "Large Payload & FormData",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
-      "preRequestScript": "// Test 1: Large JSON payload with .then pattern\nconst largePayload = {\n  items: Array.from({ length: 100 }, (_, i) => ({\n    id: i,\n    name: `Item ${i}`,\n    description: `Description for item ${i}`,\n    metadata: {\n      created: new Date().toISOString(),\n      index: i,\n      active: i % 2 === 0\n    }\n  }))\n}\n\nhopp.fetch('https://echo.hoppscotch.io', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/json' },\n  body: JSON.stringify(largePayload)\n}).then(r => r.json()).then(d => {\n  const receivedData = JSON.parse(d.data)\n  hopp.env.active.set('large_count', receivedData.items.length.toString())\n  hopp.env.active.set('large_first_id', receivedData.items[0].id.toString())\n  hopp.env.active.set('large_last_id', receivedData.items[99].id.toString())\n})\n\n// Test 2: FormData handling (if available)\ntry {\n  if (typeof FormData !== 'undefined') {\n    const formData = new FormData()\n    formData.append('field1', 'value1')\n    formData.append('field2', 'value2')\n    const formResp = await hopp.fetch('https://echo.hoppscotch.io', {\n      method: 'POST',\n      body: formData\n    })\n    const formRespData = await formResp.json()\n    hopp.env.active.set('formdata_status', formResp.status.toString())\n  } else {\n    hopp.env.active.set('formdata_status', 'skipped')\n  }\n} catch (error) {\n  hopp.env.active.set('formdata_status', 'error')\n}\n",
-      "testScript": "hopp.test('Large JSON payload works', () => {\n  hopp.expect(hopp.env.active.get('large_count')).toBe('100')\n  hopp.expect(hopp.env.active.get('large_first_id')).toBe('0')\n  hopp.expect(hopp.env.active.get('large_last_id')).toBe('99')\n})\n\nhopp.test('FormData handling works', () => {\n  const status = hopp.env.active.get('formdata_status')\n  if (status === 'skipped') {\n    hopp.expect(status).toBe('skipped')\n  } else {\n    hopp.expect(status).toBe('200')\n  }\n})\n\n// Test large payload in test script with async/await\nhopp.test('Large payload in test script works', async () => {\n  const payload = {\n    data: Array.from({ length: 50 }, (_, i) => ({ index: i, value: `test_${i}` }))\n  }\n  const response = await hopp.fetch('https://echo.hoppscotch.io', {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify(payload)\n  })\n  const data = await response.json()\n  const received = JSON.parse(data.data)\n  hopp.expect(received.data.length).toBe(50)\n  hopp.expect(received.data[0].index).toBe(0)\n  hopp.expect(received.data[49].value).toBe('test_49')\n})\n",
+      "preRequestScript": "// Test 1: Large JSON payload with .then pattern\nconst largePayload = {\n  items: Array.from({ length: 100 }, (_, i) => ({\n    id: i,\n    name: `Item ${i}`,\n    description: `Description for item ${i}`,\n    metadata: {\n      created: new Date().toISOString(),\n      index: i,\n      active: i % 2 === 0\n    }\n  }))\n}\n\nhopp.fetch('https://www.hongshu.com', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/json' },\n  body: JSON.stringify(largePayload)\n}).then(r => r.json()).then(d => {\n  const receivedData = JSON.parse(d.data)\n  hopp.env.active.set('large_count', receivedData.items.length.toString())\n  hopp.env.active.set('large_first_id', receivedData.items[0].id.toString())\n  hopp.env.active.set('large_last_id', receivedData.items[99].id.toString())\n})\n\n// Test 2: FormData handling (if available)\ntry {\n  if (typeof FormData !== 'undefined') {\n    const formData = new FormData()\n    formData.append('field1', 'value1')\n    formData.append('field2', 'value2')\n    const formResp = await hopp.fetch('https://www.hongshu.com', {\n      method: 'POST',\n      body: formData\n    })\n    const formRespData = await formResp.json()\n    hopp.env.active.set('formdata_status', formResp.status.toString())\n  } else {\n    hopp.env.active.set('formdata_status', 'skipped')\n  }\n} catch (error) {\n  hopp.env.active.set('formdata_status', 'error')\n}\n",
+      "testScript": "hopp.test('Large JSON payload works', () => {\n  hopp.expect(hopp.env.active.get('large_count')).toBe('100')\n  hopp.expect(hopp.env.active.get('large_first_id')).toBe('0')\n  hopp.expect(hopp.env.active.get('large_last_id')).toBe('99')\n})\n\nhopp.test('FormData handling works', () => {\n  const status = hopp.env.active.get('formdata_status')\n  if (status === 'skipped') {\n    hopp.expect(status).toBe('skipped')\n  } else {\n    hopp.expect(status).toBe('200')\n  }\n})\n\n// Test large payload in test script with async/await\nhopp.test('Large payload in test script works', async () => {\n  const payload = {\n    data: Array.from({ length: 50 }, (_, i) => ({ index: i, value: `test_${i}` }))\n  }\n  const response = await hopp.fetch('https://www.hongshu.com', {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify(payload)\n  })\n  const data = await response.json()\n  const received = JSON.parse(data.data)\n  hopp.expect(received.data.length).toBe(50)\n  hopp.expect(received.data[0].index).toBe(0)\n  hopp.expect(received.data[49].value).toBe('test_49')\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1517,10 +1517,10 @@
       "id": "get_methods_combined",
       "name": "GET Methods (Query, Headers, URL)",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
-      "preRequestScript": "// Test 1: Query parameters\nconst qResponse = await hopp.fetch('https://echo.hoppscotch.io?foo=bar&baz=qux&test=123')\nconst qData = await qResponse.json()\nhopp.env.active.set('query_foo', qData.args.foo || 'missing')\nhopp.env.active.set('query_baz', qData.args.baz || 'missing')\nhopp.env.active.set('query_test', qData.args.test || 'missing')\n\n// Test 2: Custom headers\nconst hResponse = await hopp.fetch('https://echo.hoppscotch.io', {\n  headers: {\n    'X-Custom-Header': 'CustomValue123',\n    'X-API-Key': 'secret-key-456',\n    'User-Agent': 'HoppscotchTest/1.0'\n  }\n})\nconst hData = await hResponse.json()\nhopp.env.active.set('custom_header', hData.headers['x-custom-header'] || 'missing')\nhopp.env.active.set('api_key_header', hData.headers['x-api-key'] || 'missing')\n\n// Test 3: URL object\nconst urlObj = new URL('https://echo.hoppscotch.io')\nurlObj.searchParams.append('url_test', 'url-object')\nurlObj.searchParams.append('value', '42')\nconst uResponse = await hopp.fetch(urlObj)\nconst uData = await uResponse.json()\nhopp.env.active.set('url_obj_test', uData.args.url_test)\nhopp.env.active.set('url_obj_value', uData.args.value)\n\n// Test 4: Special characters\nconst searchQuery = 'test & special = chars'\nconst encodedQuery = encodeURIComponent(searchQuery)\nconst sResponse = await hopp.fetch(`https://echo.hoppscotch.io?q=${encodedQuery}&other=value`)\nconst sData = await sResponse.json()\nhopp.env.active.set('special_chars_q', sData.args.q)\nhopp.env.active.set('special_chars_other', sData.args.other)\n",
+      "preRequestScript": "// Test 1: Query parameters\nconst qResponse = await hopp.fetch('https://www.hongshu.com?foo=bar&baz=qux&test=123')\nconst qData = await qResponse.json()\nhopp.env.active.set('query_foo', qData.args.foo || 'missing')\nhopp.env.active.set('query_baz', qData.args.baz || 'missing')\nhopp.env.active.set('query_test', qData.args.test || 'missing')\n\n// Test 2: Custom headers\nconst hResponse = await hopp.fetch('https://www.hongshu.com', {\n  headers: {\n    'X-Custom-Header': 'CustomValue123',\n    'X-API-Key': 'secret-key-456',\n    'User-Agent': 'HoppscotchTest/1.0'\n  }\n})\nconst hData = await hResponse.json()\nhopp.env.active.set('custom_header', hData.headers['x-custom-header'] || 'missing')\nhopp.env.active.set('api_key_header', hData.headers['x-api-key'] || 'missing')\n\n// Test 3: URL object\nconst urlObj = new URL('https://www.hongshu.com')\nurlObj.searchParams.append('url_test', 'url-object')\nurlObj.searchParams.append('value', '42')\nconst uResponse = await hopp.fetch(urlObj)\nconst uData = await uResponse.json()\nhopp.env.active.set('url_obj_test', uData.args.url_test)\nhopp.env.active.set('url_obj_value', uData.args.value)\n\n// Test 4: Special characters\nconst searchQuery = 'test & special = chars'\nconst encodedQuery = encodeURIComponent(searchQuery)\nconst sResponse = await hopp.fetch(`https://www.hongshu.com?q=${encodedQuery}&other=value`)\nconst sData = await sResponse.json()\nhopp.env.active.set('special_chars_q', sData.args.q)\nhopp.env.active.set('special_chars_other', sData.args.other)\n",
       "testScript": "hopp.test('Query parameters work', () => {\n  hopp.expect(hopp.env.active.get('query_foo')).toBe('bar')\n  hopp.expect(hopp.env.active.get('query_baz')).toBe('qux')\n  hopp.expect(hopp.env.active.get('query_test')).toBe('123')\n})\n\nhopp.test('Custom headers work', () => {\n  hopp.expect(hopp.env.active.get('custom_header')).toBe('CustomValue123')\n  hopp.expect(hopp.env.active.get('api_key_header')).toBe('secret-key-456')\n})\n\nhopp.test('URL object works', () => {\n  hopp.expect(hopp.env.active.get('url_obj_test')).toBe('url-object')\n  hopp.expect(hopp.env.active.get('url_obj_value')).toBe('42')\n})\n\nhopp.test('Special characters in URL work', () => {\n  hopp.expect(hopp.env.active.get('special_chars_q')).toBe('test & special = chars')\n  hopp.expect(hopp.env.active.get('special_chars_other')).toBe('value')\n})\n",
       "auth": {
         "authType": "inherit",
@@ -1538,11 +1538,11 @@
       "id": "post_methods_combined",
       "name": "POST Methods (JSON, URLEncoded, Binary)",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
-      "preRequestScript": "// Test 1: POST with JSON body (await pattern)\nconst jsonBody = {\n  name: 'John Doe',\n  email: 'john@example.com',\n  age: 30,\n  active: true\n}\n\nconst jsonResponse = await hopp.fetch('https://echo.hoppscotch.io', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/json' },\n  body: JSON.stringify(jsonBody)\n})\nconst jsonData = await jsonResponse.json()\nconst receivedJson = JSON.parse(jsonData.data)\nhopp.env.active.set('post_json_name', receivedJson.name)\nhopp.env.active.set('post_json_email', receivedJson.email)\n\n// Test 2: POST with URL-encoded body (.then pattern)\nconst params = new URLSearchParams()\nparams.append('username', 'testuser')\nparams.append('password', 'testpass123')\n\nhopp.fetch('https://echo.hoppscotch.io', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },\n  body: params.toString()\n}).then(response => response.json())\n  .then(data => {\n    hopp.env.active.set('urlencoded_data', data.data || 'missing')\n    hopp.env.active.set('urlencoded_ct', data.headers['content-type'] || 'missing')\n  })\n\n// Test 3: Binary POST\nconst binaryData = new Uint8Array([0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x21]) // \"Hello!\"\nawait hopp.fetch('https://echo.hoppscotch.io', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/octet-stream' },\n  body: binaryData\n}).then(r => r.json()).then(d => {\n  hopp.env.active.set('binary_method', d.method)\n  hopp.env.active.set('binary_ct', d.headers['content-type'] || 'missing')\n})\n\n// Test 4: Empty body POST\nconst emptyResponse = await hopp.fetch('https://echo.hoppscotch.io', {\n  method: 'POST'\n})\nconst emptyData = await emptyResponse.json()\nhopp.env.active.set('empty_post_method', emptyData.method)\n",
-      "testScript": "hopp.test('POST JSON body works', () => {\n  hopp.expect(hopp.env.active.get('post_json_name')).toBe('John Doe')\n  hopp.expect(hopp.env.active.get('post_json_email')).toBe('john@example.com')\n})\n\nhopp.test('POST URL-encoded body works', () => {\n  hopp.expect(hopp.env.active.get('urlencoded_data')).toInclude('username=testuser')\n  hopp.expect(hopp.env.active.get('urlencoded_ct')).toInclude('application/x-www-form-urlencoded')\n})\n\nhopp.test('Binary POST works', () => {\n  hopp.expect(hopp.env.active.get('binary_method')).toBe('POST')\n  hopp.expect(hopp.env.active.get('binary_ct')).toInclude('application/octet-stream')\n})\n\nhopp.test('Empty body POST works', () => {\n  hopp.expect(hopp.env.active.get('empty_post_method')).toBe('POST')\n})\n\n// Test 5: POST in test script with .then()\nhopp.test('POST in test script works', () => {\n  return hopp.fetch('https://echo.hoppscotch.io', {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ test: 'from-test-script' })\n  }).then(r => r.json()).then(d => {\n    const body = JSON.parse(d.data)\n    hopp.expect(body.test).toBe('from-test-script')\n  })\n})\n",
+      "preRequestScript": "// Test 1: POST with JSON body (await pattern)\nconst jsonBody = {\n  name: 'John Doe',\n  email: 'john@example.com',\n  age: 30,\n  active: true\n}\n\nconst jsonResponse = await hopp.fetch('https://www.hongshu.com', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/json' },\n  body: JSON.stringify(jsonBody)\n})\nconst jsonData = await jsonResponse.json()\nconst receivedJson = JSON.parse(jsonData.data)\nhopp.env.active.set('post_json_name', receivedJson.name)\nhopp.env.active.set('post_json_email', receivedJson.email)\n\n// Test 2: POST with URL-encoded body (.then pattern)\nconst params = new URLSearchParams()\nparams.append('username', 'testuser')\nparams.append('password', 'testpass123')\n\nhopp.fetch('https://www.hongshu.com', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },\n  body: params.toString()\n}).then(response => response.json())\n  .then(data => {\n    hopp.env.active.set('urlencoded_data', data.data || 'missing')\n    hopp.env.active.set('urlencoded_ct', data.headers['content-type'] || 'missing')\n  })\n\n// Test 3: Binary POST\nconst binaryData = new Uint8Array([0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x21]) // \"Hello!\"\nawait hopp.fetch('https://www.hongshu.com', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/octet-stream' },\n  body: binaryData\n}).then(r => r.json()).then(d => {\n  hopp.env.active.set('binary_method', d.method)\n  hopp.env.active.set('binary_ct', d.headers['content-type'] || 'missing')\n})\n\n// Test 4: Empty body POST\nconst emptyResponse = await hopp.fetch('https://www.hongshu.com', {\n  method: 'POST'\n})\nconst emptyData = await emptyResponse.json()\nhopp.env.active.set('empty_post_method', emptyData.method)\n",
+      "testScript": "hopp.test('POST JSON body works', () => {\n  hopp.expect(hopp.env.active.get('post_json_name')).toBe('John Doe')\n  hopp.expect(hopp.env.active.get('post_json_email')).toBe('john@example.com')\n})\n\nhopp.test('POST URL-encoded body works', () => {\n  hopp.expect(hopp.env.active.get('urlencoded_data')).toInclude('username=testuser')\n  hopp.expect(hopp.env.active.get('urlencoded_ct')).toInclude('application/x-www-form-urlencoded')\n})\n\nhopp.test('Binary POST works', () => {\n  hopp.expect(hopp.env.active.get('binary_method')).toBe('POST')\n  hopp.expect(hopp.env.active.get('binary_ct')).toInclude('application/octet-stream')\n})\n\nhopp.test('Empty body POST works', () => {\n  hopp.expect(hopp.env.active.get('empty_post_method')).toBe('POST')\n})\n\n// Test 5: POST in test script with .then()\nhopp.test('POST in test script works', () => {\n  return hopp.fetch('https://www.hongshu.com', {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ test: 'from-test-script' })\n  }).then(r => r.json()).then(d => {\n    const body = JSON.parse(d.data)\n    hopp.expect(body.test).toBe('from-test-script')\n  })\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1559,10 +1559,10 @@
       "id": "http_methods_combined",
       "name": "HTTP Methods (PUT, PATCH, DELETE)",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
-      "preRequestScript": "// Test PUT with mixed async\nawait hopp.fetch('https://echo.hoppscotch.io', {\n  method: 'PUT',\n  headers: { 'Content-Type': 'application/json' },\n  body: JSON.stringify({ id: 123, name: 'Updated' })\n}).then(r => r.json()).then(d => {\n  hopp.env.active.set('put_method', d.method)\n})\n\n// Test PATCH with await\nconst patchResp = await hopp.fetch('https://echo.hoppscotch.io', {\n  method: 'PATCH',\n  headers: { 'Content-Type': 'application/json' },\n  body: JSON.stringify({ field: 'updated' })\n})\nconst patchData = await patchResp.json()\nhopp.env.active.set('patch_method', patchData.method)\n\n// Test DELETE with .then\nhopp.fetch('https://echo.hoppscotch.io/resource/123', {\n  method: 'DELETE'\n}).then(r => r.json()).then(d => {\n  hopp.env.active.set('delete_method', d.method)\n  hopp.env.active.set('delete_path', d.path || 'missing')\n})\n",
+      "preRequestScript": "// Test PUT with mixed async\nawait hopp.fetch('https://www.hongshu.com', {\n  method: 'PUT',\n  headers: { 'Content-Type': 'application/json' },\n  body: JSON.stringify({ id: 123, name: 'Updated' })\n}).then(r => r.json()).then(d => {\n  hopp.env.active.set('put_method', d.method)\n})\n\n// Test PATCH with await\nconst patchResp = await hopp.fetch('https://www.hongshu.com', {\n  method: 'PATCH',\n  headers: { 'Content-Type': 'application/json' },\n  body: JSON.stringify({ field: 'updated' })\n})\nconst patchData = await patchResp.json()\nhopp.env.active.set('patch_method', patchData.method)\n\n// Test DELETE with .then\nhopp.fetch('https://www.hongshu.com/resource/123', {\n  method: 'DELETE'\n}).then(r => r.json()).then(d => {\n  hopp.env.active.set('delete_method', d.method)\n  hopp.env.active.set('delete_path', d.path || 'missing')\n})\n",
       "testScript": "hopp.test('PUT method works', () => {\n  hopp.expect(hopp.env.active.get('put_method')).toBe('PUT')\n})\n\nhopp.test('PATCH method works', () => {\n  hopp.expect(hopp.env.active.get('patch_method')).toBe('PATCH')\n})\n\nhopp.test('DELETE method works', () => {\n  hopp.expect(hopp.env.active.get('delete_method')).toBe('DELETE')\n  hopp.expect(hopp.env.active.get('delete_path')).toInclude('/resource/123')\n})\n",
       "auth": {
         "authType": "inherit",
@@ -1580,11 +1580,11 @@
       "id": "response_parsing_combined",
       "name": "Response Parsing (Headers, Status, Body)",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
-      "preRequestScript": "const response = await hopp.fetch('https://echo.hoppscotch.io')\n\n// Test headers access\nconst contentType = response.headers.get('content-type')\nlet headerCount = 0\nfor (const [key, value] of response.headers.entries()) {\n  headerCount++\n}\n\nif (contentType) {\n  hopp.env.active.set('has_content_type', (contentType !== null).toString())\n}\n\nhopp.env.active.set('header_count', headerCount.toString())\n\n// Test status properties\nhopp.env.active.set('resp_status', response.status.toString())\nhopp.env.active.set('resp_ok', response.ok.toString())\nhopp.env.active.set('resp_status_text', response.statusText || 'empty')\n\n// Test text parsing\nconst text = await response.text()\nhopp.env.active.set('text_length', text.length.toString())\nhopp.env.active.set('is_string', (typeof text === 'string').toString())\n",
-      "testScript": "hopp.test('Response headers accessible', () => {\n  // Agent interceptor doesn't return content type\n  const hasContentType = hopp.env.active.get('has_content_type')\n  if (hasContentType) {\n    hopp.expect(hopp.env.active.get('has_content_type')).toBe('true')\n  }\n\n  const headerCount = parseInt(hopp.env.active.get('header_count'))\n  hopp.expect(headerCount > 0).toBe(true)\n})\n\nhopp.test('Response status properties work', () => {\n  hopp.expect(hopp.env.active.get('resp_status')).toBe('200')\n  hopp.expect(hopp.env.active.get('resp_ok')).toBe('true')\n})\n\nhopp.test('response.text() works', () => {\n  const textLength = parseInt(hopp.env.active.get('text_length'))\n  hopp.expect(textLength > 0).toBe(true)\n  hopp.expect(hopp.env.active.get('is_string')).toBe('true')\n})\n\n// Test async parsing in test script\nhopp.test('Async response parsing in test works', async () => {\n  const response = await hopp.fetch('https://echo.hoppscotch.io?test=parse')\n  const data = await response.json()\n  hopp.expect(data.args.test).toBe('parse')\n\n  // Agent interceptor doesn't return content type\n  const contentType = response.headers.get('content-type')\n  if (contentType) {\n    hopp.expect(contentType).toInclude('json')\n  }\n})\n",
+      "preRequestScript": "const response = await hopp.fetch('https://www.hongshu.com')\n\n// Test headers access\nconst contentType = response.headers.get('content-type')\nlet headerCount = 0\nfor (const [key, value] of response.headers.entries()) {\n  headerCount++\n}\n\nif (contentType) {\n  hopp.env.active.set('has_content_type', (contentType !== null).toString())\n}\n\nhopp.env.active.set('header_count', headerCount.toString())\n\n// Test status properties\nhopp.env.active.set('resp_status', response.status.toString())\nhopp.env.active.set('resp_ok', response.ok.toString())\nhopp.env.active.set('resp_status_text', response.statusText || 'empty')\n\n// Test text parsing\nconst text = await response.text()\nhopp.env.active.set('text_length', text.length.toString())\nhopp.env.active.set('is_string', (typeof text === 'string').toString())\n",
+      "testScript": "hopp.test('Response headers accessible', () => {\n  // Agent interceptor doesn't return content type\n  const hasContentType = hopp.env.active.get('has_content_type')\n  if (hasContentType) {\n    hopp.expect(hopp.env.active.get('has_content_type')).toBe('true')\n  }\n\n  const headerCount = parseInt(hopp.env.active.get('header_count'))\n  hopp.expect(headerCount > 0).toBe(true)\n})\n\nhopp.test('Response status properties work', () => {\n  hopp.expect(hopp.env.active.get('resp_status')).toBe('200')\n  hopp.expect(hopp.env.active.get('resp_ok')).toBe('true')\n})\n\nhopp.test('response.text() works', () => {\n  const textLength = parseInt(hopp.env.active.get('text_length'))\n  hopp.expect(textLength > 0).toBe(true)\n  hopp.expect(hopp.env.active.get('is_string')).toBe('true')\n})\n\n// Test async parsing in test script\nhopp.test('Async response parsing in test works', async () => {\n  const response = await hopp.fetch('https://www.hongshu.com?test=parse')\n  const data = await response.json()\n  hopp.expect(data.args.test).toBe('parse')\n\n  // Agent interceptor doesn't return content type\n  const contentType = response.headers.get('content-type')\n  if (contentType) {\n    hopp.expect(contentType).toInclude('json')\n  }\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true
@@ -1601,11 +1601,11 @@
       "id": "dynamic_url_construction",
       "name": "Dynamic URL Construction",
       "method": "GET",
-      "endpoint": "https://echo.hoppscotch.io",
+      "endpoint": "https://www.hongshu.com",
       "params": [],
       "headers": [],
-      "preRequestScript": "// Dynamic URL building with template literals and mixed async\nconst baseUrl = 'https://echo.hoppscotch.io'\nconst endpoint = '/api/users'\nconst params = {\n  page: 1,\n  limit: 10,\n  sort: 'name',\n  filter: 'active'\n}\n\nconst queryString = Object.entries(params)\n  .map(([key, value]) => `${key}=${value}`)\n  .join('&')\n\nconst fullUrl = `${baseUrl}${endpoint}?${queryString}`\n\nawait hopp.fetch(fullUrl)\n  .then(r => r.json())\n  .then(d => {\n    hopp.env.active.set('dynamic_path', d.path || 'missing')\n    hopp.env.active.set('param_page', d.args.page)\n    hopp.env.active.set('param_limit', d.args.limit)\n    hopp.env.active.set('param_sort', d.args.sort)\n  })\n",
-      "testScript": "hopp.test('Dynamic URL construction works', () => {\n  hopp.expect(hopp.env.active.get('dynamic_path')).toInclude('/api/users')\n  hopp.expect(hopp.env.active.get('param_page')).toBe('1')\n  hopp.expect(hopp.env.active.get('param_limit')).toBe('10')\n  hopp.expect(hopp.env.active.get('param_sort')).toBe('name')\n})\n\n// Test dynamic URL in test script with .then\nhopp.test('Dynamic URL in test script works', () => {\n  const base = 'https://echo.hoppscotch.io'\n  const path = '/test/path'\n  const query = '?key=value'\n  \n  return hopp.fetch(`${base}${path}${query}`)\n    .then(r => r.json())\n    .then(d => {\n      hopp.expect(d.path).toInclude('/test/path')\n      hopp.expect(d.args.key).toBe('value')\n    })\n})\n",
+      "preRequestScript": "// Dynamic URL building with template literals and mixed async\nconst baseUrl = 'https://www.hongshu.com'\nconst endpoint = '/api/users'\nconst params = {\n  page: 1,\n  limit: 10,\n  sort: 'name',\n  filter: 'active'\n}\n\nconst queryString = Object.entries(params)\n  .map(([key, value]) => `${key}=${value}`)\n  .join('&')\n\nconst fullUrl = `${baseUrl}${endpoint}?${queryString}`\n\nawait hopp.fetch(fullUrl)\n  .then(r => r.json())\n  .then(d => {\n    hopp.env.active.set('dynamic_path', d.path || 'missing')\n    hopp.env.active.set('param_page', d.args.page)\n    hopp.env.active.set('param_limit', d.args.limit)\n    hopp.env.active.set('param_sort', d.args.sort)\n  })\n",
+      "testScript": "hopp.test('Dynamic URL construction works', () => {\n  hopp.expect(hopp.env.active.get('dynamic_path')).toInclude('/api/users')\n  hopp.expect(hopp.env.active.get('param_page')).toBe('1')\n  hopp.expect(hopp.env.active.get('param_limit')).toBe('10')\n  hopp.expect(hopp.env.active.get('param_sort')).toBe('name')\n})\n\n// Test dynamic URL in test script with .then\nhopp.test('Dynamic URL in test script works', () => {\n  const base = 'https://www.hongshu.com'\n  const path = '/test/path'\n  const query = '?key=value'\n  \n  return hopp.fetch(`${base}${path}${query}`)\n    .then(r => r.json())\n    .then(d => {\n      hopp.expect(d.path).toInclude('/test/path')\n      hopp.expect(d.args.key).toBe('value')\n    })\n})\n",
       "auth": {
         "authType": "inherit",
         "authActive": true

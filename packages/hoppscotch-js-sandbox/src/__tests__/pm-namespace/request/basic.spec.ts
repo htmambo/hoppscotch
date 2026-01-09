@@ -6,7 +6,7 @@ describe("pm.request coverage", () => {
     return expect(
       runTest(
         `
-          pw.expect(pm.request.url.toString()).toBe("https://echo.hoppscotch.io")
+          pw.expect(pm.request.url.toString()).toBe("https://www.hongshu.com")
           pw.expect(pm.request.method).toBe("GET")
           pw.expect(pm.request.headers.get("Content-Type")).toBe(null)
         `,
@@ -21,7 +21,7 @@ describe("pm.request coverage", () => {
           {
             status: "pass",
             message:
-              "Expected 'https://echo.hoppscotch.io' to be 'https://echo.hoppscotch.io'",
+              "Expected 'https://www.hongshu.com' to be 'https://www.hongshu.com'",
           },
           {
             status: "pass",
@@ -40,7 +40,7 @@ describe("pm.request coverage", () => {
     return expect(
       runTest(
         `
-          pw.expect(pm.request.url.toString()).toBe("https://echo.hoppscotch.io")
+          pw.expect(pm.request.url.toString()).toBe("https://www.hongshu.com")
           pw.expect(pm.request.url.toString().length).toBe(26)
           pw.expect(pm.request.url.toString().includes("hoppscotch")).toBe(true)
         `,
@@ -55,7 +55,7 @@ describe("pm.request coverage", () => {
           {
             status: "pass",
             message:
-              "Expected 'https://echo.hoppscotch.io' to be 'https://echo.hoppscotch.io'",
+              "Expected 'https://www.hongshu.com' to be 'https://www.hongshu.com'",
           },
           {
             status: "pass",
