@@ -191,14 +191,14 @@ export class DesktopPersistenceService {
     )
 
     const defaultSettings: PortableSettings = {
-      autoSkipWelcome: false,
+      autoSkipWelcome: true,
     }
 
     if (E.isRight(result) && result.right) {
       console.log("Loaded portable settings from store:", result.right)
       // Backward compatibility: only use autoSkipWelcome field
       return {
-        autoSkipWelcome: result.right.autoSkipWelcome ?? false,
+        autoSkipWelcome: result.right.autoSkipWelcome ?? true,
       }
     }
 
