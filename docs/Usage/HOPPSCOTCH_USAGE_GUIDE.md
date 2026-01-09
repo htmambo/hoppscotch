@@ -366,11 +366,11 @@ pw.env.set("timestamp", Date.now())
 const randomId = Math.random().toString(36).substring(7)
 pw.env.set("request_id", randomId)
 
-// 计算简单签名（示例：使用基本哈希）
-// 注意：复杂的加密算法（如 HmacSHA256）可能需要外部库支持
+// 计算示例签名（使用 Base64 编码作为占位）
+// 注意：真实签名请按服务端要求实现（如 HMAC-SHA256），可能需要引入加密库
 const secret = pw.env.get("api_secret")
 const payload = pw.env.get("user_id") + Date.now()
-// 简化示例：实际使用时需要根据 API 要求实现签名算法
+// 示例：Base64 编码仅作为占位，实际使用时请替换为正确的签名算法
 const simpleSignature = btoa(payload + secret)
 pw.env.set("signature", simpleSignature)
 ```
@@ -398,7 +398,7 @@ const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c)
 pw.env.set("uuid", uuid)
 ```
 
-**请求签名**（简化示例）:
+**请求签名**（示例占位）:
 
 ```javascript
 const apiKey = pw.env.get("api_key")
@@ -407,15 +407,15 @@ const timestamp = Date.now()
 const method = "GET"
 const path = "/api/users"
 
-// 注意：实际签名算法取决于 API 要求
-// 这里提供简化示例，请根据实际 API 文档调整
+// 注意：真实签名请按服务端 API 文档要求实现
+// 这里使用 Base64 编码作为占位示例
 const signString = `${method}\n${path}\n${timestamp}\n${apiKey}`
-const simpleSignature = btoa(signString + apiSecret)
+const placeholderSignature = btoa(signString + apiSecret)
 
-pw.env.set("signature", simpleSignature)
+pw.env.set("signature", placeholderSignature)
 pw.env.set("timestamp", timestamp)
 
-// 如果 API 需要 HMAC-SHA256 等复杂签名，请确保环境中有所需的加密库
+// 如果 API 需要 HMAC-SHA256 等签名，请根据要求实现并引入相应的加密库
 ```
 
 ### 3.2 Test Scripts
@@ -713,7 +713,8 @@ default profile (AIO 模式) 启动以下服务：
 > - `admin`: 管理台（hoppscotch-sh-admin）+ 后端（hoppscotch-backend）+ 数据库
 > - `backend`: 仅后端 API（hoppscotch-backend）+ 数据库
 > - `default-no-db`: AIO 容器（不包含数据库）
->
+
+> 注意：所有 profiles（app、admin、backend）都会自动运行 hoppscotch-migrate 容器来执行数据库迁移。>
 > 示例：`docker-compose --profile admin up -d`
 
 ### 5.2 配置环境变量
